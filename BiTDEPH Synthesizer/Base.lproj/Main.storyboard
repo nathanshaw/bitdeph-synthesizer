@@ -35,21 +35,27 @@
                                     <action selector="slider2Changed:" destination="BYZ-38-t0r" eventType="valueChanged" id="3uj-Jl-jR3"/>
                                 </connections>
                             </slider>
-                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="Mpc-oi-azq">
-                                <rect key="frame" x="39" y="62" width="296" height="31"/>
-                                <connections>
-                                    <action selector="slider1Changed:" destination="BYZ-38-t0r" eventType="valueChanged" id="DJK-hZ-FDq"/>
-                                </connections>
-                            </slider>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LgX-G4-0aY">
                                 <rect key="frame" x="25" y="475" width="325" height="94"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="56"/>
-                                <state key="normal" title="Magic"/>
+                                <state key="normal" title="Ohm"/>
                                 <connections>
                                     <action selector="magicButtonPressed:" destination="BYZ-38-t0r" eventType="touchDown" id="3kz-a5-5Wt"/>
                                     <action selector="magicButtonReleased:" destination="BYZ-38-t0r" eventType="touchUpInside" id="wFw-J0-IZt"/>
                                 </connections>
                             </button>
+                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="6yE-iO-dmI">
+                                <rect key="frame" x="39" y="319" width="296" height="31"/>
+                                <connections>
+                                    <action selector="slider5Changed:" destination="BYZ-38-t0r" eventType="valueChanged" id="O1u-0z-xcF"/>
+                                </connections>
+                            </slider>
+                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="Mpc-oi-azq">
+                                <rect key="frame" x="39" y="53" width="296" height="31"/>
+                                <connections>
+                                    <action selector="slider1Changed:" destination="BYZ-38-t0r" eventType="valueChanged" id="DJK-hZ-FDq"/>
+                                </connections>
+                            </slider>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
