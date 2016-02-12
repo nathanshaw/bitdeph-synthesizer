@@ -13,7 +13,43 @@
 		D852BFC41C6D723100330951 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D852BFC21C6D723100330951 /* Main.storyboard */; };
 		D852BFC61C6D723100330951 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D852BFC51C6D723100330951 /* Assets.xcassets */; };
 		D852BFC91C6D723100330951 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D852BFC71C6D723100330951 /* LaunchScreen.storyboard */; };
+		D852BFDE1C6D729E00330951 /* libTheAmazingAudioEngine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D852BFD71C6D728D00330951 /* libTheAmazingAudioEngine.a */; };
+		D852BFE01C6D72A400330951 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D852BFDF1C6D72A400330951 /* Accelerate.framework */; };
+		D852BFE21C6D72AB00330951 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D852BFE11C6D72AB00330951 /* AudioToolbox.framework */; };
+		D852BFE41C6D72B100330951 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D852BFE31C6D72B100330951 /* AVFoundation.framework */; };
+		D852BFE71C6D73DE00330951 /* AudioManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D852BFE61C6D73DE00330951 /* AudioManager.m */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		D852BFD61C6D728D00330951 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D852BFD01C6D728D00330951 /* TheAmazingAudioEngine.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4C215CEC1523A7D500D36CAD;
+			remoteInfo = TheAmazingAudioEngine;
+		};
+		D852BFD81C6D728D00330951 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D852BFD01C6D728D00330951 /* TheAmazingAudioEngine.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7A5687101B54610900243427;
+			remoteInfo = "TheAmazingAudioEngine OS X";
+		};
+		D852BFDA1C6D728D00330951 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D852BFD01C6D728D00330951 /* TheAmazingAudioEngine.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 17BB5B401BECD101007A2892;
+			remoteInfo = "TheAmazingAudioEngine tvOS";
+		};
+		D852BFDC1C6D729400330951 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D852BFD01C6D728D00330951 /* TheAmazingAudioEngine.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 4C215CEB1523A7D500D36CAD;
+			remoteInfo = TheAmazingAudioEngine;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		D852BFB61C6D723100330951 /* BiTDEPH Synthesizer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "BiTDEPH Synthesizer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -26,6 +62,12 @@
 		D852BFC51C6D723100330951 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D852BFC81C6D723100330951 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D852BFCA1C6D723100330951 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D852BFD01C6D728D00330951 /* TheAmazingAudioEngine.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TheAmazingAudioEngine.xcodeproj; path = TheAmazingAudioEngine/TheAmazingAudioEngine.xcodeproj; sourceTree = "<group>"; };
+		D852BFDF1C6D72A400330951 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		D852BFE11C6D72AB00330951 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		D852BFE31C6D72B100330951 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		D852BFE51C6D73DE00330951 /* AudioManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioManager.h; sourceTree = "<group>"; };
+		D852BFE61C6D73DE00330951 /* AudioManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,6 +75,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D852BFE41C6D72B100330951 /* AVFoundation.framework in Frameworks */,
+				D852BFE21C6D72AB00330951 /* AudioToolbox.framework in Frameworks */,
+				D852BFE01C6D72A400330951 /* Accelerate.framework in Frameworks */,
+				D852BFDE1C6D729E00330951 /* libTheAmazingAudioEngine.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -42,8 +88,12 @@
 		D852BFAD1C6D723100330951 = {
 			isa = PBXGroup;
 			children = (
+				D852BFE31C6D72B100330951 /* AVFoundation.framework */,
+				D852BFE11C6D72AB00330951 /* AudioToolbox.framework */,
+				D852BFDF1C6D72A400330951 /* Accelerate.framework */,
 				D852BFB81C6D723100330951 /* BiTDEPH Synthesizer */,
 				D852BFB71C6D723100330951 /* Products */,
+				D852BFD01C6D728D00330951 /* TheAmazingAudioEngine.xcodeproj */,
 			);
 			sourceTree = "<group>";
 		};
@@ -58,6 +108,8 @@
 		D852BFB81C6D723100330951 /* BiTDEPH Synthesizer */ = {
 			isa = PBXGroup;
 			children = (
+				D852BFE51C6D73DE00330951 /* AudioManager.h */,
+				D852BFE61C6D73DE00330951 /* AudioManager.m */,
 				D852BFBC1C6D723100330951 /* AppDelegate.h */,
 				D852BFBD1C6D723100330951 /* AppDelegate.m */,
 				D852BFBF1C6D723100330951 /* ViewController.h */,
@@ -79,6 +131,16 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		D852BFD11C6D728D00330951 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D852BFD71C6D728D00330951 /* libTheAmazingAudioEngine.a */,
+				D852BFD91C6D728D00330951 /* libTheAmazingAudioEngine OS X.a */,
+				D852BFDB1C6D728D00330951 /* libTheAmazingAudioEngine tvOS.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -93,6 +155,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				D852BFDD1C6D729400330951 /* PBXTargetDependency */,
 			);
 			name = "BiTDEPH Synthesizer";
 			productName = "BiTDEPH Synthesizer";
@@ -125,12 +188,42 @@
 			mainGroup = D852BFAD1C6D723100330951;
 			productRefGroup = D852BFB71C6D723100330951 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = D852BFD11C6D728D00330951 /* Products */;
+					ProjectRef = D852BFD01C6D728D00330951 /* TheAmazingAudioEngine.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				D852BFB51C6D723100330951 /* BiTDEPH Synthesizer */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		D852BFD71C6D728D00330951 /* libTheAmazingAudioEngine.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libTheAmazingAudioEngine.a;
+			remoteRef = D852BFD61C6D728D00330951 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		D852BFD91C6D728D00330951 /* libTheAmazingAudioEngine OS X.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libTheAmazingAudioEngine OS X.a";
+			remoteRef = D852BFD81C6D728D00330951 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		D852BFDB1C6D728D00330951 /* libTheAmazingAudioEngine tvOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libTheAmazingAudioEngine tvOS.a";
+			remoteRef = D852BFDA1C6D728D00330951 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		D852BFB41C6D723100330951 /* Resources */ = {
@@ -152,11 +245,20 @@
 			files = (
 				D852BFC11C6D723100330951 /* ViewController.m in Sources */,
 				D852BFBE1C6D723100330951 /* AppDelegate.m in Sources */,
+				D852BFE71C6D73DE00330951 /* AudioManager.m in Sources */,
 				D852BFBB1C6D723100330951 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D852BFDD1C6D729400330951 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = TheAmazingAudioEngine;
+			targetProxy = D852BFDC1C6D729400330951 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		D852BFC21C6D723100330951 /* Main.storyboard */ = {
@@ -264,6 +366,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				HEADER_SEARCH_PATHS = $PROJECT_DIR/TheAmazingAudioEngine;
 				INFOPLIST_FILE = "BiTDEPH Synthesizer/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "BiTDEPH.BiTDEPH-Synthesizer";
@@ -275,6 +378,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				HEADER_SEARCH_PATHS = $PROJECT_DIR/TheAmazingAudioEngine;
 				INFOPLIST_FILE = "BiTDEPH Synthesizer/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "BiTDEPH.BiTDEPH-Synthesizer";
