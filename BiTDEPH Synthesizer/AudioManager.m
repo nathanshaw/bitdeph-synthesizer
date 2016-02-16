@@ -66,10 +66,11 @@
     freq3 = freq1 * 3;
     freq4 = freq1 * 4;
     
-    gain1 = 0;
-    gain2 = 0;
-    gain3 = 0;
-    gain4 = 0;
+    masterGain = 0.0;
+    gain1 = 0.55;
+    gain2 = 0.55;
+    gain3 = 0.55;
+    gain4 = 0.55;
     
     [_audioController addChannels:@[[AEBlockChannel channelWithBlock: ^(const AudioTimeStamp *time,
                                                                        UInt32 frames,
@@ -89,8 +90,18 @@
             samp4 = sin(2*M_PI*phase4);
             
             phase1 += freq1/SRATE;
+            phase2 += freq2/SRATE;
+            phase3 += freq3/SRATE;
+            phase4 += freq4/SRATE;
+            
             if(phase1 > 1)
                 phase1 -= 1;
+            if(phase2 > 1)
+                phase2 -= 1;
+            if(phase3 > 1)
+                phase3 -= 1;
+            if(phase4 > 1)
+                phase4 -= 1;
             
             samp1 *= gain1;
             samp2 *= gain2;
@@ -117,17 +128,17 @@
 
 - (void)setGain2:(float)theGain
 {
-    gain1 = theGain;
+    gain2 = theGain;
 }
 
 - (void)setGain3:(float)theGain
 {
-    gain1 = theGain;
+    gain3 = theGain;
 }
 
 - (void)setGain4:(float)theGain
 {
-    gain1 = theGain;
+    gain4 = theGain;
 }
 
 - (void)setMasterGain:(float)theGain

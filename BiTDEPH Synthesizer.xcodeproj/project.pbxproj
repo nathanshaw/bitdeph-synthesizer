@@ -18,6 +18,7 @@
 		D852BFE21C6D72AB00330951 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D852BFE11C6D72AB00330951 /* AudioToolbox.framework */; };
 		D852BFE41C6D72B100330951 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D852BFE31C6D72B100330951 /* AVFoundation.framework */; };
 		D852BFE71C6D73DE00330951 /* AudioManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D852BFE61C6D73DE00330951 /* AudioManager.m */; };
+		D8CB84531C72E7D2003A6760 /* robot-guitar_660.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D8CB84521C72E7D2003A6760 /* robot-guitar_660.jpg */; settings = {ASSET_TAGS = (guitar, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +69,7 @@
 		D852BFE31C6D72B100330951 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		D852BFE51C6D73DE00330951 /* AudioManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioManager.h; sourceTree = "<group>"; };
 		D852BFE61C6D73DE00330951 /* AudioManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioManager.m; sourceTree = "<group>"; };
+		D8CB84521C72E7D2003A6760 /* robot-guitar_660.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "robot-guitar_660.jpg"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +110,7 @@
 		D852BFB81C6D723100330951 /* BiTDEPH Synthesizer */ = {
 			isa = PBXGroup;
 			children = (
+				D8CB84521C72E7D2003A6760 /* robot-guitar_660.jpg */,
 				D852BFE51C6D73DE00330951 /* AudioManager.h */,
 				D852BFE61C6D73DE00330951 /* AudioManager.m */,
 				D852BFBC1C6D723100330951 /* AppDelegate.h */,
@@ -168,6 +171,9 @@
 		D852BFAE1C6D723100330951 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				KnownAssetTags = (
+					guitar,
+				);
 				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = "Nathan Villicaña-Shaw";
 				TargetAttributes = {
@@ -231,6 +237,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D852BFC91C6D723100330951 /* LaunchScreen.storyboard in Resources */,
+				D8CB84531C72E7D2003A6760 /* robot-guitar_660.jpg in Resources */,
 				D852BFC61C6D723100330951 /* Assets.xcassets in Resources */,
 				D852BFC41C6D723100330951 /* Main.storyboard in Resources */,
 			);
@@ -405,6 +412,7 @@
 				D852BFCF1C6D723100330951 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -83,4 +83,22 @@
     AudioManager *audioManager = [AudioManager instance];
     [audioManager setMasterGain:0.0];
 }
+
+- (IBAction)singleFingerTap:(id)sender
+{
+    UITouch *touchAction = (UITouch *)sender;
+    NSLog(@"Single Finger Tap");
+    NSLog([touchAction getForce]);
+    AudioManager *audioManager = [AudioManager instance];
+    [audioManager setMasterGain:1.0];
+}
+
+- (IBAction)doubleFingerTap:(id)sender
+{
+    UITouch *touchAction = (UITouch *)sender;
+    NSLog(@"Double Finger Tap");
+    AudioManager *audioManager = [AudioManager instance];
+    [audioManager setMasterGain:0.0];
+}
+
 @end

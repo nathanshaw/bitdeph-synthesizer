@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "7EDED652BCD705E6E6F13332A04B0DD3A9AAEF3B",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "7EDED652BCD705E6E6F13332A04B0DD3A9AAEF3B" : 0,
+    "F1BC4876811AFC3F9EBAC1327B95940A459E2E4A" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "D7DE70C4-860B-420B-80E4-8AE642EFB2EE",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "7EDED652BCD705E6E6F13332A04B0DD3A9AAEF3B" : "BiTDEPH%20Synthesizer\/",
+    "F1BC4876811AFC3F9EBAC1327B95940A459E2E4A" : "BiTDEPH%20Synthesizer\/TheAmazingAudioEngine\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "BiTDEPH Synthesizer",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "BiTDEPH Synthesizer.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/nathanshaw\/bitdeph-synthesizer",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "7EDED652BCD705E6E6F13332A04B0DD3A9AAEF3B"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/TheAmazingAudioEngine\/TheAmazingAudioEngine.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "F1BC4876811AFC3F9EBAC1327B95940A459E2E4A"
+    }
+  ]
+}

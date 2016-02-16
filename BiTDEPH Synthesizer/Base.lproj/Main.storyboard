@@ -14,56 +14,84 @@
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="5tM-Sb-kXN">
-                                <rect key="frame" x="39" y="220" width="296" height="31"/>
+                                <rect key="frame" x="12" y="215" width="296" height="31"/>
                                 <connections>
                                     <action selector="slider4Changed:" destination="BYZ-38-t0r" eventType="valueChanged" id="d1Z-XR-f5c"/>
                                 </connections>
                             </slider>
                             <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="ZnT-bW-G7g">
-                                <rect key="frame" x="39" y="166" width="296" height="31"/>
+                                <rect key="frame" x="12" y="164" width="296" height="31"/>
                                 <connections>
                                     <action selector="slider3Changed:" destination="BYZ-38-t0r" eventType="valueChanged" id="Pak-Y5-Q1b"/>
                                 </connections>
                             </slider>
                             <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="bqj-hw-H9h">
-                                <rect key="frame" x="39" y="113" width="296" height="31"/>
+                                <rect key="frame" x="12" y="114" width="296" height="31"/>
                                 <connections>
                                     <action selector="slider2Changed:" destination="BYZ-38-t0r" eventType="valueChanged" id="3uj-Jl-jR3"/>
                                 </connections>
                             </slider>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LgX-G4-0aY">
-                                <rect key="frame" x="25" y="475" width="325" height="94"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="56"/>
-                                <state key="normal" title="Ohm"/>
-                                <connections>
-                                    <action selector="magicButtonPressed:" destination="BYZ-38-t0r" eventType="touchDown" id="3kz-a5-5Wt"/>
-                                    <action selector="magicButtonReleased:" destination="BYZ-38-t0r" eventType="touchUpInside" id="wFw-J0-IZt"/>
-                                </connections>
-                            </button>
-                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="6yE-iO-dmI">
-                                <rect key="frame" x="39" y="319" width="296" height="31"/>
-                                <connections>
-                                    <action selector="slider5Changed:" destination="BYZ-38-t0r" eventType="valueChanged" id="O1u-0z-xcF"/>
-                                </connections>
-                            </slider>
                             <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="Mpc-oi-azq">
-                                <rect key="frame" x="39" y="53" width="296" height="31"/>
+                                <rect key="frame" x="12" y="70" width="296" height="31"/>
+                                <gestureRecognizers/>
                                 <connections>
                                     <action selector="slider1Changed:" destination="BYZ-38-t0r" eventType="valueChanged" id="DJK-hZ-FDq"/>
                                 </connections>
                             </slider>
+                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="6yE-iO-dmI">
+                                <rect key="frame" x="12" y="530" width="296" height="31"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <action selector="slider5Changed:" destination="BYZ-38-t0r" eventType="valueChanged" id="O1u-0z-xcF"/>
+                                </connections>
+                            </slider>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FWU-Ls-Cf0" colorLabel="IBBuiltInLabel-Yellow">
+                                <rect key="frame" x="0.0" y="260" width="320" height="256"/>
+                                <color key="backgroundColor" red="0.79696625928015474" green="0.85814146363254051" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="4pI-qb-fSm" appends="YES" id="ph4-Ln-AXI"/>
+                                    <outletCollection property="gestureRecognizers" destination="585-0h-612" appends="YES" id="HIw-Ah-3Ih"/>
+                                </connections>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="tP5-Bg-iqP" appends="YES" id="ovB-o8-yqt"/>
+                        </connections>
                     </view>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <swipeGestureRecognizer direction="right" id="tP5-Bg-iqP"/>
+                <rotationGestureRecognizer id="Wy7-gp-YZ4">
+                    <connections>
+                        <action selector="multiTouchReleased:" destination="BYZ-38-t0r" id="4Ka-kx-WNL"/>
+                    </connections>
+                </rotationGestureRecognizer>
+                <pinchGestureRecognizer id="L2x-Is-p5x">
+                    <connections>
+                        <action selector="multiTouchReleased:" destination="BYZ-38-t0r" id="KoF-mR-3Ki"/>
+                    </connections>
+                </pinchGestureRecognizer>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="Znp-VN-BEi"/>
+                <tapGestureRecognizer id="4pI-qb-fSm">
+                    <connections>
+                        <action selector="singleFingerTap:" destination="BYZ-38-t0r" id="3AM-Zw-5Ho"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer numberOfTouchesRequired="3" id="585-0h-612">
+                    <connections>
+                        <action selector="doubleFingerTap:" destination="BYZ-38-t0r" id="7hd-IE-zl4"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="296.5" y="257.5"/>
+            <point key="canvasLocation" x="296" y="257"/>
         </scene>
     </scenes>
 </document>
