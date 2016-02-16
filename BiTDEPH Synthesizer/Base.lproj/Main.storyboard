@@ -18,25 +18,49 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="5tM-Sb-kXN">
-                                <rect key="frame" x="12" y="215" width="296" height="31"/>
+                                <rect key="frame" x="46" y="215" width="262" height="31"/>
                                 <connections>
                                     <action selector="slider4Changed:" destination="BYZ-38-t0r" eventType="valueChanged" id="d1Z-XR-f5c"/>
                                 </connections>
                             </slider>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="faM-yz-oN8">
+                                <rect key="frame" x="0.0" y="219" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uQ2-a9-TsL">
+                                <rect key="frame" x="0.0" y="181" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iNH-PZ-uHO">
+                                <rect key="frame" x="0.0" y="148" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ild-he-CZO">
+                                <rect key="frame" x="0.0" y="110" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="ZnT-bW-G7g">
-                                <rect key="frame" x="12" y="164" width="296" height="31"/>
+                                <rect key="frame" x="46" y="177" width="262" height="31"/>
                                 <connections>
                                     <action selector="slider3Changed:" destination="BYZ-38-t0r" eventType="valueChanged" id="Pak-Y5-Q1b"/>
                                 </connections>
                             </slider>
                             <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="bqj-hw-H9h">
-                                <rect key="frame" x="12" y="114" width="296" height="31"/>
+                                <rect key="frame" x="46" y="139" width="262" height="31"/>
                                 <connections>
                                     <action selector="slider2Changed:" destination="BYZ-38-t0r" eventType="valueChanged" id="3uj-Jl-jR3"/>
                                 </connections>
                             </slider>
                             <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="Mpc-oi-azq">
-                                <rect key="frame" x="12" y="70" width="296" height="31"/>
+                                <rect key="frame" x="46" y="101" width="262" height="31"/>
                                 <gestureRecognizers/>
                                 <connections>
                                     <action selector="slider1Changed:" destination="BYZ-38-t0r" eventType="valueChanged" id="DJK-hZ-FDq"/>
@@ -51,12 +75,37 @@
                             </slider>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FWU-Ls-Cf0" colorLabel="IBBuiltInLabel-Yellow">
                                 <rect key="frame" x="0.0" y="260" width="320" height="256"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1ZI-Y3-WcV">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="256"/>
+                                        <connections>
+                                            <action selector="magicButtonPressed:" destination="BYZ-38-t0r" eventType="touchDown" id="pe8-XW-ExK"/>
+                                            <action selector="magicButtonReleased:" destination="BYZ-38-t0r" eventType="touchUpInside" id="tsn-p1-USf"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
                                 <color key="backgroundColor" red="0.79696625928015474" green="0.85814146363254051" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <gestureRecognizers/>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="4pI-qb-fSm" appends="YES" id="ph4-Ln-AXI"/>
                                     <outletCollection property="gestureRecognizers" destination="585-0h-612" appends="YES" id="HIw-Ah-3Ih"/>
+                                    <outletCollection property="gestureRecognizers" destination="dOQ-e1-8g6" appends="YES" id="Bpq-7g-Rwf"/>
                                 </connections>
+                            </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zg3-ZS-bZg" colorLabel="IBBuiltInLabel-Yellow">
+                                <rect key="frame" x="0.0" y="20" width="320" height="73"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8If-zJ-sft">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="73"/>
+                                        <connections>
+                                            <action selector="magicButtonReleased:" destination="BYZ-38-t0r" eventType="touchUpInside" id="U90-SJ-gMY"/>
+                                            <action selector="secondButtonPressed:" destination="BYZ-38-t0r" eventType="touchDown" id="Lb2-53-myh"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.74896926070000003" green="1" blue="0.70720336890000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" red="0.74896926070000003" green="1" blue="0.70720336890000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <gestureRecognizers/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -90,8 +139,10 @@
                         <action selector="doubleFingerTap:" destination="BYZ-38-t0r" id="7hd-IE-zl4"/>
                     </connections>
                 </tapGestureRecognizer>
+                <tapGestureRecognizer id="dOQ-e1-8g6"/>
             </objects>
             <point key="canvasLocation" x="296" y="257"/>
         </scene>
     </scenes>
+    <color key="tintColor" red="0.74896926068434855" green="1" blue="0.70720336888856594" alpha="1" colorSpace="calibratedRGB"/>
 </document>

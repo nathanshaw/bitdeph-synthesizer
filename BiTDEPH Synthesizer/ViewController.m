@@ -84,21 +84,25 @@
     [audioManager setMasterGain:0.0];
 }
 
-- (IBAction)singleFingerTap:(id)sender
+- (IBAction)secondButtonPressed:(id)sender
 {
-    UITouch *touchAction = (UITouch *)sender;
-    NSLog(@"Single Finger Tap");
-    NSLog([touchAction getForce]);
+    // UIButton *magicButtonUp = (UIButton *)sender;
+    NSLog(@"Second Button Released");
     AudioManager *audioManager = [AudioManager instance];
+    int r = arc4random_uniform(2) + 1;
+    [audioManager setOT1:r];
+    NSLog(@"%i", r);
+    r = arc4random_uniform(4) + r + 1;
+    [audioManager setOT2:r];
+    NSLog(@"%i", r);
+    r = arc4random_uniform(4) + r + 1;
+    [audioManager setOT3:r];
+    NSLog(@"%i", r);
+    r = arc4random_uniform(4) + r + 1;
+    [audioManager setOT4:r];
+    NSLog(@"%i", r);
+    [audioManager setFrequency:[audioManager getFrequency]];
     [audioManager setMasterGain:1.0];
-}
-
-- (IBAction)doubleFingerTap:(id)sender
-{
-    UITouch *touchAction = (UITouch *)sender;
-    NSLog(@"Double Finger Tap");
-    AudioManager *audioManager = [AudioManager instance];
-    [audioManager setMasterGain:0.0];
 }
 
 @end

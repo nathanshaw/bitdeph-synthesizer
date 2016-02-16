@@ -20,6 +20,7 @@
     float phase3;
     float phase4;
     
+    float mainFreq;
     float freq1;
     float freq2;
     float freq3;
@@ -30,7 +31,11 @@
     float gain2;
     float gain3;
     float gain4;
-    // float arr[4];
+    
+    int overtone1;
+    int overtone2;
+    int overtone3;
+    int overtone4;
 }
 
 @end
@@ -61,6 +66,7 @@
     phase3 = 0;
     phase4 = 0;
     
+    mainFreq = 220;
     freq1 = 220;
     freq2 = freq1 * 2;
     freq3 = freq1 * 3;
@@ -71,6 +77,11 @@
     gain2 = 0.55;
     gain3 = 0.55;
     gain4 = 0.55;
+    
+    overtone1 = 1;
+    overtone2 = 2;
+    overtone3 = 3;
+    overtone4 = 4;
     
     [_audioController addChannels:@[[AEBlockChannel channelWithBlock: ^(const AudioTimeStamp *time,
                                                                        UInt32 frames,
@@ -141,6 +152,26 @@
     gain4 = theGain;
 }
 
+- (void)setOT1:(int)overTone
+{
+    overtone1 = overTone;
+}
+
+- (void)setOT2:(int)overTone
+{
+    overtone2 = overTone;
+}
+
+- (void)setOT3:(int)overTone
+{
+    overtone3 = overTone;
+}
+
+- (void)setOT4:(int)overTone
+{
+    overtone4 = overTone;
+}
+
 - (void)setMasterGain:(float)theGain
 {
     masterGain = theGain;
@@ -148,10 +179,16 @@
 
 - (void)setFrequency:(float)frequency
 {
-    freq1 = frequency;
-    freq2 = frequency * 2;
-    freq3 = frequency * 3;
-    freq4 = frequency * 4;
+    mainFreq = frequency;
+    freq1 = frequency * overtone1;
+    freq2 = frequency * overtone2;
+    freq3 = frequency * overtone3;
+    freq4 = frequency * overtone4;
+}
+
+- (float)getFrequency
+{
+    return mainFreq;
 }
 
 @end

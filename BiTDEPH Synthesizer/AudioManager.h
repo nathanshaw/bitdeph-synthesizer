@@ -19,8 +19,14 @@
 - (void)setGain3:(float)gain;
 - (void)setGain4:(float)gain;
 
+- (void)setOT1:(int)overTone;
+- (void)setOT2:(int)overTone;
+- (void)setOT3:(int)overTone;
+- (void)setOT4:(int)overTone;
+
 - (void)setMasterGain:(float)gain;
 
 - (void)setFrequency:(float)frequency;
+- (float)getFrequency;
 
 @end
