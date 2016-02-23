@@ -63,9 +63,19 @@
 - (IBAction)slider5Changed:(id)sender
 {
     UISlider *slider5 = (UISlider *)sender;
-    NSLog(@"Slider 5 value : %f", [slider5 value] * 500 + 200);
+    hertz = [slider5 value] * 500 + 400;
+    NSLog(@"Slider 5 value : %f", hertz);
     AudioManager *audioManager = [AudioManager instance];
-    [audioManager setFrequency:([slider5 value] * 500 + 200)];
+    hertzLabel.text = [NSString stringWithFormat:@"%.01f", hertz];
+    [audioManager setFrequency:(hertz)];
+}
+
+- (IBAction)randomnessSliderChanged:(id)sender
+{
+    UISlider *randomSlider = (UISlider *)sender;
+    NSLog(@"Random slider value : %f", [randomSlider value]);
+    AudioManager *audioManager = [AudioManager instance];
+    [audioManager setRandomLevel:([randomSlider value])];
 }
 
 - (IBAction)magicButtonPressed:(id)sender
@@ -90,15 +100,19 @@
     NSLog(@"Second Button Released");
     AudioManager *audioManager = [AudioManager instance];
     int r = arc4random_uniform(2) + 1;
+    overtoneLabel1.text = [NSString stringWithFormat: @"%i", r];
     [audioManager setOT1:r];
     NSLog(@"%i", r);
     r = arc4random_uniform(4) + r + 1;
+    overtoneLabel2.text = [NSString stringWithFormat: @"%i", r];
     [audioManager setOT2:r];
     NSLog(@"%i", r);
     r = arc4random_uniform(4) + r + 1;
+    overtoneLabel3.text = [NSString stringWithFormat: @"%i", r];
     [audioManager setOT3:r];
     NSLog(@"%i", r);
     r = arc4random_uniform(4) + r + 1;
+    overtoneLabel4.text = [NSString stringWithFormat: @"%i", r];
     [audioManager setOT4:r];
     NSLog(@"%i", r);
     [audioManager setFrequency:[audioManager getFrequency]];

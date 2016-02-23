@@ -18,7 +18,9 @@
 		D852BFE21C6D72AB00330951 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D852BFE11C6D72AB00330951 /* AudioToolbox.framework */; };
 		D852BFE41C6D72B100330951 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D852BFE31C6D72B100330951 /* AVFoundation.framework */; };
 		D852BFE71C6D73DE00330951 /* AudioManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D852BFE61C6D73DE00330951 /* AudioManager.m */; };
-		D8CB84531C72E7D2003A6760 /* robot-guitar_660.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D8CB84521C72E7D2003A6760 /* robot-guitar_660.jpg */; settings = {ASSET_TAGS = (guitar, ); }; };
+		D8E3D46C1C7BB7EF00F7862E /* overtones.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D8E3D46B1C7BB7EF00F7862E /* overtones.jpg */; };
+		D8E3D4701C7BC58800F7862E /* dj.png in Resources */ = {isa = PBXBuildFile; fileRef = D8E3D46F1C7BC58800F7862E /* dj.png */; };
+		D8E3D4721C7BC83C00F7862E /* spencer.png in Resources */ = {isa = PBXBuildFile; fileRef = D8E3D4711C7BC83C00F7862E /* spencer.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,7 +71,9 @@
 		D852BFE31C6D72B100330951 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		D852BFE51C6D73DE00330951 /* AudioManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioManager.h; sourceTree = "<group>"; };
 		D852BFE61C6D73DE00330951 /* AudioManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioManager.m; sourceTree = "<group>"; };
-		D8CB84521C72E7D2003A6760 /* robot-guitar_660.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "robot-guitar_660.jpg"; sourceTree = "<group>"; };
+		D8E3D46B1C7BB7EF00F7862E /* overtones.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = overtones.jpg; sourceTree = "<group>"; };
+		D8E3D46F1C7BC58800F7862E /* dj.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dj.png; sourceTree = "<group>"; };
+		D8E3D4711C7BC83C00F7862E /* spencer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spencer.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,9 +114,11 @@
 		D852BFB81C6D723100330951 /* BiTDEPH Synthesizer */ = {
 			isa = PBXGroup;
 			children = (
-				D8CB84521C72E7D2003A6760 /* robot-guitar_660.jpg */,
+				D8E3D46F1C7BC58800F7862E /* dj.png */,
+				D8E3D4711C7BC83C00F7862E /* spencer.png */,
 				D852BFE51C6D73DE00330951 /* AudioManager.h */,
 				D852BFE61C6D73DE00330951 /* AudioManager.m */,
+				D8E3D46B1C7BB7EF00F7862E /* overtones.jpg */,
 				D852BFBC1C6D723100330951 /* AppDelegate.h */,
 				D852BFBD1C6D723100330951 /* AppDelegate.m */,
 				D852BFBF1C6D723100330951 /* ViewController.h */,
@@ -236,8 +242,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D8E3D4721C7BC83C00F7862E /* spencer.png in Resources */,
+				D8E3D4701C7BC58800F7862E /* dj.png in Resources */,
 				D852BFC91C6D723100330951 /* LaunchScreen.storyboard in Resources */,
-				D8CB84531C72E7D2003A6760 /* robot-guitar_660.jpg in Resources */,
+				D8E3D46C1C7BB7EF00F7862E /* overtones.jpg in Resources */,
 				D852BFC61C6D723100330951 /* Assets.xcassets in Resources */,
 				D852BFC41C6D723100330951 /* Main.storyboard in Resources */,
 			);

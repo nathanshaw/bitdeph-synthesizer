@@ -26,6 +26,11 @@
     float freq3;
     float freq4;
     
+    int randomLevel1;
+    int randomLevel2;
+    int randomLevel3;
+    int randomLevel4;
+    
     float masterGain;
     float gain1;
     float gain2;
@@ -66,8 +71,8 @@
     phase3 = 0;
     phase4 = 0;
     
-    mainFreq = 220;
-    freq1 = 220;
+    mainFreq = 500;
+    freq1 = 500;
     freq2 = freq1 * 2;
     freq3 = freq1 * 3;
     freq4 = freq1 * 4;
@@ -114,10 +119,10 @@
             if(phase4 > 1)
                 phase4 -= 1;
             
-            samp1 *= gain1;
-            samp2 *= gain2;
-            samp3 *= gain3;
-            samp4 *= gain4;
+            samp1 *= gain1 * gain1;
+            samp2 *= gain2 * gain2;
+            samp3 *= gain3 * gain3;
+            samp4 *= gain4 * gain4;
             
             masterSamp = samp1 + samp2 + samp3 + samp4;
             masterSamp *= masterGain;
@@ -177,13 +182,23 @@
     masterGain = theGain;
 }
 
+- (void)setRandomLevel:(float)randomness
+{
+    randomLevel1 = arc4random_uniform((int)randomness);
+    randomLevel2 = arc4random_uniform((int)randomness * 2);
+    randomLevel3 = arc4random_uniform((int)randomness * 3);
+    randomLevel4 = arc4random_uniform((int)randomness * 4);
+    // NSLog(@"Random Levels : %i %i %i %i", randomLevel1, randomLevel2, randomLevel3, randomLevel4);
+}
+
 - (void)setFrequency:(float)frequency
 {
     mainFreq = frequency;
-    freq1 = frequency * overtone1;
-    freq2 = frequency * overtone2;
-    freq3 = frequency * overtone3;
-    freq4 = frequency * overtone4;
+    freq1 = (mainFreq) * overtone1 + randomLevel1;
+    freq2 = (mainFreq) * overtone2 + randomLevel2;
+    freq3 = (mainFreq) * overtone3 + randomLevel3;
+    freq4 = (mainFreq) * overtone4 + randomLevel4;
+    // NSLog(@"FREQS : %f %f %f %f", freq1, freq2, freq3, freq4);
 }
 
 - (float)getFrequency

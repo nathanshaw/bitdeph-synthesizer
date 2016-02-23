@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#include <stdlib.h>
 
 @interface AudioManager : NSObject
 
@@ -27,6 +28,9 @@
 - (void)setMasterGain:(float)gain;
 
 - (void)setFrequency:(float)frequency;
+
+- (void)setRandomLevel:(float)randomness;
+
 - (float)getFrequency;
 
 @end
