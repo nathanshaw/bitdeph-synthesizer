@@ -37,7 +37,7 @@
 - (IBAction)FMModulatorFreqSliderChanged:(id)sender
 {
  UISlider *FMModulatorSlider = (UISlider *)sender;
- NSLog(@"Slider 1 value : %f", [FMModulatorSlider value]);
+ NSLog(@"Slider 2 value : %f", [FMModulatorSlider value]);
  AudioManager *audioManager = [AudioManager instance];
  [audioManager setFMModulatorFreq:(pow([FMModulatorSlider value], 2) * 500 + 200)];
  // FMCarrierFreqLabel.text = [NSString stringWithFormat: @"%02f", [FMCarrierSlider value]];
@@ -46,9 +46,9 @@
 - (IBAction)FMModulatorGainSliderChanged:(id)sender
 {
  UISlider *FMModulatorGainSlider = (UISlider *)sender;
- NSLog(@"Slider 2 value : %f", [FMModulatorGainSlider value]);
+ NSLog(@"Slider 4 value : %f", [FMModulatorGainSlider value]);
  AudioManager *audioManager = [AudioManager instance];
- [audioManager setFMModulatorGain:(pow([FMModulatorGainSlider value], 3) * 500)];
+ [audioManager setFMModulatorGain:(pow([FMModulatorGainSlider value], 2) * 100 + 50)];
  // FMCarrierFreqLabel.text = [NSString stringWithFormat: @"%02f", [FMCarrierSlider value]];
 }
 
@@ -57,7 +57,16 @@
  UISlider *AMFreqSlider = (UISlider *)sender;
  NSLog(@"Slider 3 value : %f", [AMFreqSlider value]);
  AudioManager *audioManager = [AudioManager instance];
- [audioManager setAMFreq:(pow([AMFreqSlider value], 3) * 500)];
+ [audioManager setAMFreq:(pow([AMFreqSlider value], 4) * 12500)];
+ // FMCarrierFreqLabel.text = [NSString stringWithFormat: @"%02f", [FMCarrierSlider value]];
+}
+
+- (IBAction)AMGainSliderChanged:(id)sender
+{
+ UISlider *AMGainSlider = (UISlider *)sender;
+ NSLog(@"Slider 5 value : %f", [AMGainSlider value]);
+ AudioManager *audioManager = [AudioManager instance];
+ [audioManager setAMFreq:(pow([AMGainSlider value], 2))];
  // FMCarrierFreqLabel.text = [NSString stringWithFormat: @"%02f", [FMCarrierSlider value]];
 }
 

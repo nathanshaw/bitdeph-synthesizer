@@ -81,12 +81,13 @@
         for(int i = 0; i < frames; i++)
         {
             // add in ability for more waveforms in future
+            
             FMCarrierSamp = sin(2*M_PI*FMCarrierPhase) * FMCarrierGain;
             FMModulatorSamp = sin(2*M_PI*FMModulatorPhase) * FMModulatorGain;
             AMSamp = sin(2*M_PI*AMPhase) * AMGain;
             
-            FMCarrierPhase += FMCarrierFreq/SRATE;
-            FMModulatorPhase += FMModulatorFreq/SRATE;
+            FMCarrierPhase += (FMCarrierFreq/SRATE) * FMCarrierGain ;
+            FMModulatorPhase += FMModulatorFreq/SRATE * FMModulatorGain;
             AMPhase += AMFreq/SRATE;
             
             if(FMCarrierPhase > 1)
@@ -98,10 +99,10 @@
             
             // currently AM is disabled
             if(AMActive){
-                masterSamp = FMCarrierPhase * FMModulatorPhase * masterGain * 0.75 * AMPhase;
+                masterSamp = (FMCarrierPhase + FMModulatorPhase) * masterGain * AMPhase;
             }
             else {
-                masterSamp = FMCarrierPhase * FMModulatorPhase * masterGain * 0.75;
+                masterSamp = (FMCarrierPhase + FMModulatorPhase) * masterGain * 0.75;
                 
             }
             ((float*)(audio->mBuffers[0].mData))[i] = masterSamp;
