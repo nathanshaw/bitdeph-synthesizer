@@ -35,6 +35,8 @@
     float FMCarrierSamp;
     float FMModulatorSamp;
     float AMSamp;
+    
+    bool AMActive;
 }
 
 @end
@@ -69,7 +71,7 @@
     AMFreq = 10;
     
     masterGain = 0.0;
-    FMModulatorGain = 0.55;
+    FMModulatorGain = 10.0;
     FMCarrierGain = 0.55;
     
     [_audioController addChannels:@[[AEBlockChannel channelWithBlock: ^(const AudioTimeStamp *time,
@@ -95,8 +97,13 @@
                 AMPhase -= 1;
             
             // currently AM is disabled
-            masterSamp = FMCarrierPhase * FMModulatorPhase * masterGain * 0.75;
-            
+            if(AMActive){
+                masterSamp = FMCarrierPhase * FMModulatorPhase * masterGain * 0.75 * AMPhase;
+            }
+            else {
+                masterSamp = FMCarrierPhase * FMModulatorPhase * masterGain * 0.75;
+                
+            }
             ((float*)(audio->mBuffers[0].mData))[i] = masterSamp;
             ((float*)(audio->mBuffers[1].mData))[i] = masterSamp;
         }
@@ -156,6 +163,19 @@
     return AMFreq;
 }
 
+- (void)activateAM
+{
+    AMActive = true;
+}
+
+- (void)deactivateAM
+{
+    AMActive = false;
+}
+- (void)toggleAM
+{
+    AMActive = !AMActive;
+}
 @end
 
 

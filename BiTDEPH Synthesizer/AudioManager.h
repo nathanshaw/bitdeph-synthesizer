@@ -15,6 +15,10 @@
 
 - (void)startAudio;
 
+- (void)activateAM;
+- (void)deactivateAM;
+- (void)toggleAM;
+
 - (void)setFMCarrierGain:(float)gain;
 - (void)setFMModulatorGain:(float)gain;
 
@@ -27,5 +31,6 @@
 - (float)getFMCarrierFreq;
 - (float)getFMModulatFreq;
 - (float)getAMmodularFreq;
+
 
 @end
