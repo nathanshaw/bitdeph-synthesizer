@@ -10,12 +10,14 @@
 
 @interface ViewController : UIViewController
 {
-    IBOutlet UILabel *overtoneLabel1;
-    IBOutlet UILabel *overtoneLabel2;
-    IBOutlet UILabel *overtoneLabel3;
-    IBOutlet UILabel *overtoneLabel4;
-    IBOutlet UILabel *hertzLabel;
-
+    IBOutlet UILabel *FMModulatorFreqLabel;
+    IBOutlet UILabel *FMCarrierFreqLabel;
+    IBOutlet UILabel *AMFreqLabel;
+    
+    IBOutlet UILabel *FMModulatorGainLabel;
+    IBOutlet UILabel *FMCarrierGainLabel;
+    IBOutlet UILabel *AMGainLabel;
+    
     float hertz;
 }
 @end

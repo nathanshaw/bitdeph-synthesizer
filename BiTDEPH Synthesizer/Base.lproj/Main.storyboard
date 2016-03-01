@@ -19,9 +19,6 @@
                         <subviews>
                             <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="5tM-Sb-kXN">
                                 <rect key="frame" x="46" y="224" width="262" height="31"/>
-                                <connections>
-                                    <action selector="slider4Changed:" destination="BYZ-38-t0r" eventType="valueChanged" id="d1Z-XR-f5c"/>
-                                </connections>
                             </slider>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="4" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="faM-yz-oN8">
                                 <rect key="frame" x="20" y="228" width="22" height="21"/>
@@ -49,29 +46,17 @@
                             </label>
                             <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="ZnT-bW-G7g">
                                 <rect key="frame" x="46" y="186" width="262" height="31"/>
-                                <connections>
-                                    <action selector="slider3Changed:" destination="BYZ-38-t0r" eventType="valueChanged" id="Pak-Y5-Q1b"/>
-                                </connections>
                             </slider>
                             <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="bqj-hw-H9h">
                                 <rect key="frame" x="46" y="148" width="262" height="31"/>
-                                <connections>
-                                    <action selector="slider2Changed:" destination="BYZ-38-t0r" eventType="valueChanged" id="3uj-Jl-jR3"/>
-                                </connections>
                             </slider>
                             <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="Mpc-oi-azq">
                                 <rect key="frame" x="46" y="110" width="262" height="31"/>
                                 <gestureRecognizers/>
-                                <connections>
-                                    <action selector="slider1Changed:" destination="BYZ-38-t0r" eventType="valueChanged" id="DJK-hZ-FDq"/>
-                                </connections>
                             </slider>
                             <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="6yE-iO-dmI">
                                 <rect key="frame" x="46" y="530" width="262" height="31"/>
                                 <gestureRecognizers/>
-                                <connections>
-                                    <action selector="slider5Changed:" destination="BYZ-38-t0r" eventType="valueChanged" id="O1u-0z-xcF"/>
-                                </connections>
                             </slider>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="400" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a9l-E7-Uoi">
                                 <rect key="frame" x="0.0" y="522" width="54" height="46"/>
@@ -85,10 +70,6 @@
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8If-zJ-sft">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="73"/>
                                         <state key="normal" image="overtones.jpg"/>
-                                        <connections>
-                                            <action selector="magicButtonReleased:" destination="BYZ-38-t0r" eventType="touchUpInside" id="U90-SJ-gMY"/>
-                                            <action selector="secondButtonPressed:" destination="BYZ-38-t0r" eventType="touchDown" id="Lb2-53-myh"/>
-                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.74896926070000003" green="1" blue="0.70720336890000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -102,8 +83,8 @@
                                         <rect key="frame" x="-575" y="-682" width="1471" height="1600"/>
                                         <state key="normal" image="spencer.png"/>
                                         <connections>
-                                            <action selector="magicButtonPressed:" destination="BYZ-38-t0r" eventType="touchDown" id="pe8-XW-ExK"/>
-                                            <action selector="magicButtonReleased:" destination="BYZ-38-t0r" eventType="touchUpInside" id="tsn-p1-USf"/>
+                                            <action selector="magicButtonPressed:" destination="BYZ-38-t0r" eventType="touchDown" id="MZ5-kc-Ymm"/>
+                                            <action selector="magicButtonReleased:" destination="BYZ-38-t0r" eventType="touchUpInside" id="t9l-5K-D9I"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -111,22 +92,12 @@
                             </view>
                             <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="5" minValue="0.0" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="qxT-ho-MZh">
                                 <rect key="frame" x="18" y="257" width="290" height="31"/>
-                                <connections>
-                                    <action selector="randomnessSliderChanged:" destination="BYZ-38-t0r" eventType="touchDragInside" id="DDN-zX-RbC"/>
-                                </connections>
                             </slider>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-                    <connections>
-                        <outlet property="hertzLabel" destination="a9l-E7-Uoi" id="rom-oR-ZGD"/>
-                        <outlet property="overtoneLabel1" destination="ild-he-CZO" id="l4V-DD-MS3"/>
-                        <outlet property="overtoneLabel2" destination="iNH-PZ-uHO" id="StY-wv-Okp"/>
-                        <outlet property="overtoneLabel3" destination="uQ2-a9-TsL" id="vKQ-Um-QSI"/>
-                        <outlet property="overtoneLabel4" destination="faM-yz-oN8" id="vhH-st-Xg9"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

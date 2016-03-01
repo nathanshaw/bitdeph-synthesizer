@@ -15,22 +15,17 @@
 
 - (void)startAudio;
 
-- (void)setGain1:(float)gain;
-- (void)setGain2:(float)gain;
-- (void)setGain3:(float)gain;
-- (void)setGain4:(float)gain;
+- (void)setFMCarrierGain:(float)gain;
+- (void)setFMModulatorGain:(float)gain;
 
-- (void)setOT1:(int)overTone;
-- (void)setOT2:(int)overTone;
-- (void)setOT3:(int)overTone;
-- (void)setOT4:(int)overTone;
+- (void)setFMCarrierFreq:(float)carrierFreq;
+- (void)setFMModulatorFreq:(float)modulatorFreq;
+- (void)setAMFreq:(float)AMFreq;
 
 - (void)setMasterGain:(float)gain;
 
-- (void)setFrequency:(float)frequency;
-
-- (void)setRandomLevel:(float)randomness;
-
-- (float)getFrequency;
+- (float)getFMCarrierFreq;
+- (float)getFMModulatFreq;
+- (float)getAMmodularFreq;
 
 @end

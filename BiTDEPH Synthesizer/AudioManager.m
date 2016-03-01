@@ -7,6 +7,7 @@
 //
 
 #import "AudioManager.h"
+#import "ViewController.h"
 #import "TheAmazingAudioEngine/TheAmazingAudioEngine.h"
 
 #define SRATE 44100
@@ -15,32 +16,25 @@
 {
     AEAudioController *_audioController;
     
-    float phase1;
-    float phase2;
-    float phase3;
-    float phase4;
+    // why are these declared here instead of in the .h file?
+    float FMCarrierPhase;
+    float FMModulatorPhase;
+    float AMPhase;
     
-    float mainFreq;
-    float freq1;
-    float freq2;
-    float freq3;
-    float freq4;
-    
-    int randomLevel1;
-    int randomLevel2;
-    int randomLevel3;
-    int randomLevel4;
+    float FMCarrierFreq;
+    float FMModulatorFreq;
+    float AMFreq;
     
     float masterGain;
-    float gain1;
-    float gain2;
-    float gain3;
-    float gain4;
     
-    int overtone1;
-    int overtone2;
-    int overtone3;
-    int overtone4;
+    float FMCarrierGain;
+    float FMModulatorGain;
+    float AMGain;
+    
+    float masterSamp;
+    float FMCarrierSamp;
+    float FMModulatorSamp;
+    float AMSamp;
 }
 
 @end
@@ -66,27 +60,17 @@
                                                               inputEnabled:NO];
     _audioController.preferredBufferDuration = 0.005;
     
-    phase1 = 0;
-    phase2 = 0;
-    phase3 = 0;
-    phase4 = 0;
+    FMCarrierPhase = 0;
+    FMModulatorPhase = 0;
+    AMPhase = 0;
     
-    mainFreq = 500;
-    freq1 = 500;
-    freq2 = freq1 * 2;
-    freq3 = freq1 * 3;
-    freq4 = freq1 * 4;
+    FMModulatorFreq = 500;
+    FMCarrierFreq = 230;
+    AMFreq = 10;
     
     masterGain = 0.0;
-    gain1 = 0.55;
-    gain2 = 0.55;
-    gain3 = 0.55;
-    gain4 = 0.55;
-    
-    overtone1 = 1;
-    overtone2 = 2;
-    overtone3 = 3;
-    overtone4 = 4;
+    FMModulatorGain = 0.55;
+    FMCarrierGain = 0.55;
     
     [_audioController addChannels:@[[AEBlockChannel channelWithBlock: ^(const AudioTimeStamp *time,
                                                                        UInt32 frames,
@@ -94,39 +78,24 @@
         
         for(int i = 0; i < frames; i++)
         {
-            float masterSamp = 0;
-            float samp1 = 0;
-            float samp2 = 0;
-            float samp3 = 0;
-            float samp4 = 0;
+            // add in ability for more waveforms in future
+            FMCarrierSamp = sin(2*M_PI*FMCarrierPhase) * FMCarrierGain;
+            FMModulatorSamp = sin(2*M_PI*FMModulatorPhase) * FMModulatorGain;
+            AMSamp = sin(2*M_PI*AMPhase) * AMGain;
             
-            samp1 = sin(2*M_PI*phase1);
-            samp2 = sin(2*M_PI*phase2);
-            samp3 = sin(2*M_PI*phase3);
-            samp4 = sin(2*M_PI*phase4);
+            FMCarrierPhase += FMCarrierFreq/SRATE;
+            FMModulatorPhase += FMModulatorFreq/SRATE;
+            AMPhase += AMFreq/SRATE;
             
-            phase1 += freq1/SRATE;
-            phase2 += freq2/SRATE;
-            phase3 += freq3/SRATE;
-            phase4 += freq4/SRATE;
+            if(FMCarrierPhase > 1)
+                FMCarrierPhase -= 1;
+            if(FMModulatorPhase > 1)
+                FMModulatorPhase -= 1;
+            if(AMPhase > 1)
+                AMPhase -= 1;
             
-            if(phase1 > 1)
-                phase1 -= 1;
-            if(phase2 > 1)
-                phase2 -= 1;
-            if(phase3 > 1)
-                phase3 -= 1;
-            if(phase4 > 1)
-                phase4 -= 1;
-            
-            samp1 *= gain1 * gain1;
-            samp2 *= gain2 * gain2;
-            samp3 *= gain3 * gain3;
-            samp4 *= gain4 * gain4;
-            
-            masterSamp = samp1 + samp2 + samp3 + samp4;
-            masterSamp *= masterGain;
-            masterSamp *= 0.25;
+            // currently AM is disabled
+            masterSamp = FMCarrierPhase * FMModulatorPhase * masterGain * 0.75;
             
             ((float*)(audio->mBuffers[0].mData))[i] = masterSamp;
             ((float*)(audio->mBuffers[1].mData))[i] = masterSamp;
@@ -137,73 +106,54 @@
     [_audioController start:NULL];
 }
 
-- (void)setGain1:(float)theGain
+- (void)setFMCarrierGain:(float)gain
 {
-    gain1 = theGain;
+    FMCarrierGain = gain;
 }
 
-- (void)setGain2:(float)theGain
+- (void)setFMModulatorGain:(float)gain
 {
-    gain2 = theGain;
+    FMModulatorGain = gain;
 }
 
-- (void)setGain3:(float)theGain
+- (void)setAMGain:(float)gain
 {
-    gain3 = theGain;
+    AMGain = gain;
 }
 
-- (void)setGain4:(float)theGain
+- (void)setMasterGain:(float)gain
 {
-    gain4 = theGain;
+    masterGain = gain;
 }
 
-- (void)setOT1:(int)overTone
+- (void)setFMCarrierFreq:(float)freq
 {
-    overtone1 = overTone;
+    FMCarrierFreq = freq;
 }
 
-- (void)setOT2:(int)overTone
+- (void)setFMModulatorFreq:(float)freq
 {
-    overtone2 = overTone;
+    FMModulatorFreq = freq;
 }
 
-- (void)setOT3:(int)overTone
+- (void)setAMFreq:(float)freq
 {
-    overtone3 = overTone;
+    AMFreq = freq;
 }
 
-- (void)setOT4:(int)overTone
+- (float)getFMCarrierFreq
 {
-    overtone4 = overTone;
+    return FMCarrierFreq;
 }
 
-- (void)setMasterGain:(float)theGain
+- (float)getFMModulatorFreq
 {
-    masterGain = theGain;
+    return FMModulatorFreq;
 }
 
-- (void)setRandomLevel:(float)randomness
+- (float)getAMFreq
 {
-    randomLevel1 = arc4random_uniform((int)randomness);
-    randomLevel2 = arc4random_uniform((int)randomness * 2);
-    randomLevel3 = arc4random_uniform((int)randomness * 3);
-    randomLevel4 = arc4random_uniform((int)randomness * 4);
-    // NSLog(@"Random Levels : %i %i %i %i", randomLevel1, randomLevel2, randomLevel3, randomLevel4);
-}
-
-- (void)setFrequency:(float)frequency
-{
-    mainFreq = frequency;
-    freq1 = (mainFreq) * overtone1 + randomLevel1;
-    freq2 = (mainFreq) * overtone2 + randomLevel2;
-    freq3 = (mainFreq) * overtone3 + randomLevel3;
-    freq4 = (mainFreq) * overtone4 + randomLevel4;
-    // NSLog(@"FREQS : %f %f %f %f", freq1, freq2, freq3, freq4);
-}
-
-- (float)getFrequency
-{
-    return mainFreq;
+    return AMFreq;
 }
 
 @end
