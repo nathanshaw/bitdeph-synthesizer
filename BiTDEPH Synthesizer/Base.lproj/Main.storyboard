@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="5tM-Sb-kXN">
-                                <rect key="frame" x="46" y="224" width="262" height="31"/>
+                                <rect key="frame" x="88" y="224" width="220" height="31"/>
                                 <connections>
                                     <action selector="FMModulatorGainSliderChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="xXW-vQ-9Di"/>
                                 </connections>
@@ -48,34 +48,24 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="ZnT-bW-G7g">
-                                <rect key="frame" x="46" y="186" width="262" height="31"/>
+                                <rect key="frame" x="88" y="186" width="220" height="31"/>
                                 <connections>
                                     <action selector="AMFreqSliderChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="DY0-Lq-3BU"/>
                                 </connections>
                             </slider>
                             <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="bqj-hw-H9h">
-                                <rect key="frame" x="46" y="148" width="262" height="31"/>
+                                <rect key="frame" x="88" y="148" width="220" height="31"/>
                                 <connections>
                                     <action selector="FMModulatorFreqSliderChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="11H-H2-O8h"/>
                                 </connections>
                             </slider>
                             <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="Mpc-oi-azq">
-                                <rect key="frame" x="46" y="110" width="262" height="31"/>
+                                <rect key="frame" x="88" y="110" width="220" height="31"/>
                                 <gestureRecognizers/>
                                 <connections>
                                     <action selector="FMCarrierFreqSliderChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="Uad-Qe-wWV"/>
                                 </connections>
                             </slider>
-                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="6yE-iO-dmI">
-                                <rect key="frame" x="46" y="530" width="262" height="31"/>
-                                <gestureRecognizers/>
-                            </slider>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="400" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a9l-E7-Uoi">
-                                <rect key="frame" x="0.0" y="522" width="54" height="46"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zg3-ZS-bZg" colorLabel="IBBuiltInLabel-Yellow">
                                 <rect key="frame" x="0.0" y="20" width="320" height="73"/>
                                 <subviews>
@@ -106,7 +96,7 @@
                                 <gestureRecognizers/>
                             </view>
                             <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="5" minValue="0.0" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="qxT-ho-MZh">
-                                <rect key="frame" x="46" y="257" width="262" height="31"/>
+                                <rect key="frame" x="88" y="257" width="220" height="31"/>
                                 <connections>
                                     <action selector="AMGainSliderChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="Jmm-25-aC6"/>
                                 </connections>
