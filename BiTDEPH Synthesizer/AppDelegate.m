@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "AudioManager.h"
 #import <CoreMotion/CoreMotion.h>
+#import "ViewController.h"
 
 @interface AppDelegate ()
 {
@@ -26,6 +27,7 @@
     // Override point for customization after application launch.
     [[AudioManager instance] startAudio];
     self.motionManager = [CMMotionManager new];
+    vc = [ViewController]
     [self.motionManager startDeviceMotionUpdatesUsingReferenceFrame:CMAttitudeReferenceFrameXTrueNorthZVertical
                                                             toQueue:[NSOperationQueue mainQueue]
                                                         withHandler:^(CMDeviceMotion * motion, NSError * error) {
@@ -37,6 +39,9 @@
                                                             [audioManager setFMCarrierFreq:2500+1300*motion.attitude.pitch/(M_PI*2)];
                                                             [audioManager setFMModulatorFreq:2500+1200*motion.attitude.roll/(M_PI*2)];
                                                             [audioManager setAMFreq:300+200*motion.attitude.yaw/(M_PI*2)];
+                                                            [ViewController setLabelValue_1];
+                                                            [ViewController setLabelValue_2];
+                                                            [ViewController setLabelValue_3];
                                                         }];
     
     return YES;

@@ -70,6 +70,24 @@
  // FMCarrierFreqLabel.text = [NSString stringWithFormat: @"%02f", [FMCarrierSlider value]];
 }
 
+- (void)setLabelValue_1
+{
+    AudioManager *audioManager = [AudioManager instance];
+    label1.text = [NSString stringWithFormat: @"%02f", [audioManager getFMModulatFreq]];
+}
+
+- (void)setLabelValue_2
+{
+    AudioManager *audioManager = [AudioManager instance];
+    label2.text = [NSString stringWithFormat: @"%02f", [audioManager getFMCarrierFreq]];
+}
+
+- (void)setLabelValue_3
+{
+    AudioManager *audioManager = [AudioManager instance];
+    label3.text = [NSString stringWithFormat: @"%02f", [audioManager getAMmodularFreq]];
+}
+
 - (IBAction)magicButtonPressed:(id)sender
 {
     NSLog(@"Magic Button Pressed");
