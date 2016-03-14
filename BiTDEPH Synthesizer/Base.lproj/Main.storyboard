@@ -17,33 +17,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iNH-PZ-uHO">
-                                <rect key="frame" x="149" y="118" width="22" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ild-he-CZO">
-                                <rect key="frame" x="20" y="119" width="22" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zg3-ZS-bZg" colorLabel="IBBuiltInLabel-Yellow">
-                                <rect key="frame" x="0.0" y="20" width="320" height="73"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8If-zJ-sft">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="73"/>
-                                        <state key="normal" image="overtones.jpg"/>
-                                        <connections>
-                                            <action selector="topButtonPressed:" destination="BYZ-38-t0r" eventType="touchDown" id="414-7h-NRm"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" red="0.74896926070000003" green="1" blue="0.70720336890000002" alpha="1" colorSpace="calibratedRGB"/>
-                                <color key="tintColor" red="0.74896926070000003" green="1" blue="0.70720336890000002" alpha="1" colorSpace="calibratedRGB"/>
-                                <gestureRecognizers/>
-                            </view>
                             <view contentMode="scaleAspectFit" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FWU-Ls-Cf0" colorLabel="IBBuiltInLabel-Yellow">
                                 <rect key="frame" x="0.0" y="148" width="320" height="366"/>
                                 <subviews>
@@ -58,12 +31,6 @@
                                 </subviews>
                                 <gestureRecognizers/>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="3" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uQ2-a9-TsL">
-                                <rect key="frame" x="278" y="119" width="22" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
@@ -93,7 +60,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="overtones.jpg" width="410" height="96"/>
         <image name="spencer.png" width="180" height="180"/>
     </resources>
     <color key="tintColor" red="0.74896926068434855" green="1" blue="0.70720336888856594" alpha="1" colorSpace="calibratedRGB"/>
