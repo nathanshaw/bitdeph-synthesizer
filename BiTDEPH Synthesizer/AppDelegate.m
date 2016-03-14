@@ -44,4 +44,14 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
+- (void)setLabelValue_1:(UIApplication *)application {
+    //// blah blah;
+}
+- (void)setLabelValue_2:(UIApplication *)application {
+    //// blah blah;
+}
+- (void)setLabelValue_3:(UIApplication *)application {
+    //// blah blah;
+}
+
 @end
