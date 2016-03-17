@@ -7,15 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <GLKit/GLKit.h>
 
-@interface ViewController : UIViewController
+@interface ViewController : GLKViewController
 {
-    IBOutlet UILabel *overtoneLabel1;
-    IBOutlet UILabel *overtoneLabel2;
-    IBOutlet UILabel *overtoneLabel3;
-    IBOutlet UILabel *overtoneLabel4;
-    IBOutlet UILabel *hertzLabel;
-
     float hertz;
 }
 @end

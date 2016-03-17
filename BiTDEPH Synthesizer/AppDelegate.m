@@ -8,8 +8,15 @@
 
 #import "AppDelegate.h"
 #import "AudioManager.h"
+#import <CoreMotion/CoreMotion.h>
+#import "ViewController.h"
 
 @interface AppDelegate ()
+{
+}
+
+// fancy property = setter and getter automatically generated
+@property CMMotionManager *motionManager;
 
 @end
 
@@ -19,6 +26,21 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     [[AudioManager instance] startAudio];
+    self.motionManager = [CMMotionManager new];
+    // vc = [ViewController]
+    [self.motionManager startDeviceMotionUpdatesUsingReferenceFrame:CMAttitudeReferenceFrameXTrueNorthZVertical
+                                                            toQueue:[NSOperationQueue mainQueue]
+                                                        withHandler:^(CMDeviceMotion * motion, NSError * error) {
+//                                                            NSLog(@"attitude: %f %f %f",
+//                                                                  motion.attitude.pitch,
+//                                                                  motion.attitude.roll,
+//                                                                  motion.attitude.yaw);
+                                                            AudioManager *audioManager = [AudioManager instance];
+                                                            [audioManager setFMCarrierFreq:2500+1300*motion.attitude.pitch/(M_PI*2)];
+                                                            [audioManager setFMModulatorFreq:2500+1200*motion.attitude.roll/(M_PI*2)];
+                                                            [audioManager setAMFreq:300+200*motion.attitude.yaw/(M_PI*2)];
+                                                        }];
+    
     return YES;
 }
 

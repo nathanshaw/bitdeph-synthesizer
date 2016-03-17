@@ -1,13 +1,14 @@
 //
 //  AudioManager.h
-//  WeekThree
-//
-//  Created by Spencer Salazar on 2/8/16.
-//  Copyright © 2016 Spencer Salazar. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #include <stdlib.h>
+
+#import "ViewController.h"
+#import "TheAmazingAudioEngine/TheAmazingAudioEngine.h"
+
+#define SRATE 44100
 
 @interface AudioManager : NSObject
 
@@ -15,22 +16,19 @@
 
 - (void)startAudio;
 
-- (void)setGain1:(float)gain;
-- (void)setGain2:(float)gain;
-- (void)setGain3:(float)gain;
-- (void)setGain4:(float)gain;
+- (void)setSynthesisState:(int)state;
+- (void)setFMCarrierGain:(float)gain;
+- (void)setFMModulatorGain:(float)gain;
 
-- (void)setOT1:(int)overTone;
-- (void)setOT2:(int)overTone;
-- (void)setOT3:(int)overTone;
-- (void)setOT4:(int)overTone;
+- (void)setFMCarrierFreq:(float)carrierFreq;
+- (void)setFMModulatorFreq:(float)modulatorFreq;
+- (void)setAMFreq:(float)AMFreq;
 
 - (void)setMasterGain:(float)gain;
 
-- (void)setFrequency:(float)frequency;
-
-- (void)setRandomLevel:(float)randomness;
-
-- (float)getFrequency;
+- (float)getFMCarrierFreq;
+- (float)getFMModulatorFreq;
+- (float)getAMModulatorFreq;
 
 @end
+
