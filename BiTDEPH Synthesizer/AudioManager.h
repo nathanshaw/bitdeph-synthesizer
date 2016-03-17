@@ -1,13 +1,14 @@
 //
 //  AudioManager.h
-//  WeekThree
-//
-//  Created by Spencer Salazar on 2/8/16.
-//  Copyright © 2016 Spencer Salazar. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #include <stdlib.h>
+
+#import "ViewController.h"
+#import "TheAmazingAudioEngine/TheAmazingAudioEngine.h"
+
+#define SRATE 44100
 
 @interface AudioManager : NSObject
 
@@ -15,10 +16,7 @@
 
 - (void)startAudio;
 
-- (void)activateAM;
-- (void)deactivateAM;
-- (void)toggleAM;
-
+- (void)setSynthesisState:(int)state;
 - (void)setFMCarrierGain:(float)gain;
 - (void)setFMModulatorGain:(float)gain;
 
@@ -29,8 +27,8 @@
 - (void)setMasterGain:(float)gain;
 
 - (float)getFMCarrierFreq;
-- (float)getFMModulatFreq;
-- (float)getAMmodularFreq;
-
+- (float)getFMModulatorFreq;
+- (float)getAMModulatorFreq;
 
 @end
+

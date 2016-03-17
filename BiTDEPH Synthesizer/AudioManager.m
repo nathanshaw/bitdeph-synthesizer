@@ -1,16 +1,15 @@
 //
 //  AudioManager.m
-//  WeekThree
 //
-//  Created by Spencer Salazar on 2/8/16.
-//  Copyright © 2016 Spencer Salazar. All rights reserved.
-//
+
+#define OFF 0
+#define ONLY_CARRIER 1
+#define FM_ACTIVE 2
+#define AM_ACTIVE 3
+#define FOUR_FINGER 4
+#define FIVE_FINGER 5
 
 #import "AudioManager.h"
-#import "ViewController.h"
-#import "TheAmazingAudioEngine/TheAmazingAudioEngine.h"
-
-#define SRATE 44100
 
 @interface AudioManager ()
 {
@@ -36,7 +35,7 @@
     float FMModulatorSamp;
     float AMSamp;
     
-    bool AMActive;
+    int synthesisState;
 }
 
 @end
@@ -70,7 +69,7 @@
     FMCarrierFreq = 230;
     AMFreq = 10;
     
-    masterGain = 0.0;
+    masterGain = 0.9;
     FMModulatorGain = 10.0;
     FMCarrierGain = 0.55;
     
@@ -98,13 +97,37 @@
                 AMPhase -= 1;
             
             // currently AM is disabled
-            if(AMActive){
-                masterSamp = (FMCarrierPhase + FMModulatorPhase) * masterGain * AMPhase;
+            switch (synthesisState) {
+                case OFF:
+                    masterSamp = 0;
+                    break;
+                    
+                case ONLY_CARRIER:
+                    //
+                    masterSamp = FMCarrierPhase * masterGain;
+                    break;
+                    
+                case FM_ACTIVE:
+                    masterSamp = (FMCarrierPhase + FMModulatorPhase) * masterGain;
+                    break;
+                    
+                case AM_ACTIVE:
+                    masterSamp = (FMCarrierPhase + FMModulatorPhase) * AMPhase * masterGain;
+                    break;
+                    
+                case FOUR_FINGER:
+                    masterSamp = (FMCarrierPhase + FMModulatorPhase) * AMPhase * masterGain;
+                    break;
+                    
+                case FIVE_FINGER:
+                    masterSamp = (FMCarrierPhase + FMModulatorPhase) * AMPhase * masterGain;
+                    break;
+                    
+                default:
+                    masterSamp = 0;
+                    break;
             }
-            else {
-                masterSamp = (FMCarrierPhase + FMModulatorPhase) * masterGain * 0.75;
-                
-            }
+            
             ((float*)(audio->mBuffers[0].mData))[i] = masterSamp;
             ((float*)(audio->mBuffers[1].mData))[i] = masterSamp;
         }
@@ -159,24 +182,16 @@
     return FMModulatorFreq;
 }
 
-- (float)getAMFreq
+- (float)getAMModulatorFreq
 {
     return AMFreq;
 }
 
-- (void)activateAM
+- (void)setSynthesisState:(int)state
 {
-    AMActive = true;
+    synthesisState = state;
 }
 
-- (void)deactivateAM
-{
-    AMActive = false;
-}
-- (void)toggleAM
-{
-    AMActive = !AMActive;
-}
 @end
 
 

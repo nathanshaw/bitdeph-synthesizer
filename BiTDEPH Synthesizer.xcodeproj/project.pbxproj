@@ -7,9 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D80C3B071C9A01BB0056C1CD /* ShaderHelper.mm in Sources */ = {isa = PBXBuildFile; fileRef = D80C3B061C9A01BB0056C1CD /* ShaderHelper.mm */; };
+		D80C3B101C9A01CD0056C1CD /* Shader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = D80C3B0A1C9A01CD0056C1CD /* Shader.vsh */; };
+		D80C3B111C9A01CD0056C1CD /* Shader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = D80C3B0B1C9A01CD0056C1CD /* Shader.fsh */; };
+		D80C3B121C9A01CD0056C1CD /* Texture.mm in Sources */ = {isa = PBXBuildFile; fileRef = D80C3B0D1C9A01CD0056C1CD /* Texture.mm */; };
+		D80C3B131C9A01CD0056C1CD /* TextureShader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = D80C3B0E1C9A01CD0056C1CD /* TextureShader.vsh */; };
+		D80C3B141C9A01CD0056C1CD /* TextureShader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = D80C3B0F1C9A01CD0056C1CD /* TextureShader.fsh */; };
+		D80C3B171C9A06C00056C1CD /* pizza.png in Resources */ = {isa = PBXBuildFile; fileRef = D80C3B151C9A06C00056C1CD /* pizza.png */; };
+		D80C3B181C9A06C00056C1CD /* flare.png in Resources */ = {isa = PBXBuildFile; fileRef = D80C3B161C9A06C00056C1CD /* flare.png */; };
 		D852BFBB1C6D723100330951 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D852BFBA1C6D723100330951 /* main.m */; };
 		D852BFBE1C6D723100330951 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D852BFBD1C6D723100330951 /* AppDelegate.m */; };
-		D852BFC11C6D723100330951 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D852BFC01C6D723100330951 /* ViewController.m */; };
+		D852BFC11C6D723100330951 /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = D852BFC01C6D723100330951 /* ViewController.mm */; };
 		D852BFC41C6D723100330951 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D852BFC21C6D723100330951 /* Main.storyboard */; };
 		D852BFC61C6D723100330951 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D852BFC51C6D723100330951 /* Assets.xcassets */; };
 		D852BFC91C6D723100330951 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D852BFC71C6D723100330951 /* LaunchScreen.storyboard */; };
@@ -52,12 +60,22 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D80C3B051C9A01BB0056C1CD /* ShaderHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShaderHelper.h; sourceTree = "<group>"; };
+		D80C3B061C9A01BB0056C1CD /* ShaderHelper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ShaderHelper.mm; sourceTree = "<group>"; };
+		D80C3B0A1C9A01CD0056C1CD /* Shader.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Shader.vsh; sourceTree = "<group>"; };
+		D80C3B0B1C9A01CD0056C1CD /* Shader.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Shader.fsh; sourceTree = "<group>"; };
+		D80C3B0C1C9A01CD0056C1CD /* Texture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Texture.h; sourceTree = "<group>"; };
+		D80C3B0D1C9A01CD0056C1CD /* Texture.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Texture.mm; sourceTree = "<group>"; };
+		D80C3B0E1C9A01CD0056C1CD /* TextureShader.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = TextureShader.vsh; sourceTree = "<group>"; };
+		D80C3B0F1C9A01CD0056C1CD /* TextureShader.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = TextureShader.fsh; sourceTree = "<group>"; };
+		D80C3B151C9A06C00056C1CD /* pizza.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pizza.png; sourceTree = "<group>"; };
+		D80C3B161C9A06C00056C1CD /* flare.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flare.png; sourceTree = "<group>"; };
 		D852BFB61C6D723100330951 /* BiTDEPH Synthesizer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "BiTDEPH Synthesizer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D852BFBA1C6D723100330951 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D852BFBC1C6D723100330951 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		D852BFBD1C6D723100330951 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		D852BFBF1C6D723100330951 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		D852BFC01C6D723100330951 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		D852BFC01C6D723100330951 /* ViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ViewController.mm; sourceTree = "<group>"; };
 		D852BFC31C6D723100330951 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D852BFC51C6D723100330951 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D852BFC81C6D723100330951 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -110,14 +128,24 @@
 			children = (
 				D852BFE51C6D73DE00330951 /* AudioManager.h */,
 				D852BFE61C6D73DE00330951 /* AudioManager.m */,
+				D80C3B051C9A01BB0056C1CD /* ShaderHelper.h */,
+				D80C3B061C9A01BB0056C1CD /* ShaderHelper.mm */,
 				D852BFBC1C6D723100330951 /* AppDelegate.h */,
 				D852BFBD1C6D723100330951 /* AppDelegate.m */,
 				D852BFBF1C6D723100330951 /* ViewController.h */,
-				D852BFC01C6D723100330951 /* ViewController.m */,
+				D852BFC01C6D723100330951 /* ViewController.mm */,
 				D852BFC21C6D723100330951 /* Main.storyboard */,
 				D852BFC51C6D723100330951 /* Assets.xcassets */,
 				D852BFC71C6D723100330951 /* LaunchScreen.storyboard */,
 				D852BFCA1C6D723100330951 /* Info.plist */,
+				D80C3B0A1C9A01CD0056C1CD /* Shader.vsh */,
+				D80C3B0B1C9A01CD0056C1CD /* Shader.fsh */,
+				D80C3B0C1C9A01CD0056C1CD /* Texture.h */,
+				D80C3B0D1C9A01CD0056C1CD /* Texture.mm */,
+				D80C3B0E1C9A01CD0056C1CD /* TextureShader.vsh */,
+				D80C3B0F1C9A01CD0056C1CD /* TextureShader.fsh */,
+				D80C3B151C9A06C00056C1CD /* pizza.png */,
+				D80C3B161C9A06C00056C1CD /* flare.png */,
 				D852BFB91C6D723100330951 /* Supporting Files */,
 			);
 			path = "BiTDEPH Synthesizer";
@@ -233,9 +261,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D80C3B131C9A01CD0056C1CD /* TextureShader.vsh in Resources */,
+				D80C3B101C9A01CD0056C1CD /* Shader.vsh in Resources */,
+				D80C3B171C9A06C00056C1CD /* pizza.png in Resources */,
+				D80C3B181C9A06C00056C1CD /* flare.png in Resources */,
 				D852BFC91C6D723100330951 /* LaunchScreen.storyboard in Resources */,
+				D80C3B141C9A01CD0056C1CD /* TextureShader.fsh in Resources */,
 				D852BFC61C6D723100330951 /* Assets.xcassets in Resources */,
 				D852BFC41C6D723100330951 /* Main.storyboard in Resources */,
+				D80C3B111C9A01CD0056C1CD /* Shader.fsh in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -246,10 +280,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D852BFC11C6D723100330951 /* ViewController.m in Sources */,
+				D80C3B071C9A01BB0056C1CD /* ShaderHelper.mm in Sources */,
+				D852BFC11C6D723100330951 /* ViewController.mm in Sources */,
 				D852BFBE1C6D723100330951 /* AppDelegate.m in Sources */,
 				D852BFE71C6D73DE00330951 /* AudioManager.m in Sources */,
 				D852BFBB1C6D723100330951 /* main.m in Sources */,
+				D80C3B121C9A01CD0056C1CD /* Texture.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

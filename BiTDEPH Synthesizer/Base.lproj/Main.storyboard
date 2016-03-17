@@ -13,25 +13,9 @@
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                    <view key="view" multipleTouchEnabled="YES" contentMode="scaleToFill" id="8bC-Xf-vdC" customClass="GLKView">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleAspectFit" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FWU-Ls-Cf0" colorLabel="IBBuiltInLabel-Yellow">
-                                <rect key="frame" x="0.0" y="148" width="320" height="366"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1ZI-Y3-WcV">
-                                        <rect key="frame" x="-575" y="-535" width="1471" height="1600"/>
-                                        <state key="normal" image="spencer.png"/>
-                                        <connections>
-                                            <action selector="magicButtonPressed:" destination="BYZ-38-t0r" eventType="touchDown" id="MZ5-kc-Ymm"/>
-                                            <action selector="magicButtonReleased:" destination="BYZ-38-t0r" eventType="touchUpInside" id="t9l-5K-D9I"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <gestureRecognizers/>
-                            </view>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                     </view>
@@ -41,26 +25,6 @@
             </objects>
             <point key="canvasLocation" x="296" y="257"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="HSa-XO-Cgd">
-            <objects>
-                <viewController id="bIN-iD-W1g" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="JdJ-Ll-WJJ"/>
-                        <viewControllerLayoutGuide type="bottom" id="WzS-xm-Jgb"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="2yY-EJ-5kH">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Vhw-gd-RAy" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-        </scene>
     </scenes>
-    <resources>
-        <image name="spencer.png" width="180" height="180"/>
-    </resources>
     <color key="tintColor" red="0.74896926068434855" green="1" blue="0.70720336888856594" alpha="1" colorSpace="calibratedRGB"/>
 </document>
