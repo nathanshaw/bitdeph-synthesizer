@@ -60,6 +60,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D805D6461C9F933F00B4B246 /* AudioSynthesis.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioSynthesis.h; sourceTree = "<group>"; };
 		D80C3B051C9A01BB0056C1CD /* ShaderHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShaderHelper.h; sourceTree = "<group>"; };
 		D80C3B061C9A01BB0056C1CD /* ShaderHelper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ShaderHelper.mm; sourceTree = "<group>"; };
 		D80C3B0A1C9A01CD0056C1CD /* Shader.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Shader.vsh; sourceTree = "<group>"; };
@@ -128,6 +129,7 @@
 			children = (
 				D852BFE51C6D73DE00330951 /* AudioManager.h */,
 				D852BFE61C6D73DE00330951 /* AudioManager.m */,
+				D805D6461C9F933F00B4B246 /* AudioSynthesis.h */,
 				D80C3B051C9A01BB0056C1CD /* ShaderHelper.h */,
 				D80C3B061C9A01BB0056C1CD /* ShaderHelper.mm */,
 				D852BFBC1C6D723100330951 /* AppDelegate.h */,

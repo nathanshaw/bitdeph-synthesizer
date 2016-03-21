@@ -10,6 +10,7 @@
 #define FIVE_FINGER 5
 
 #import "AudioManager.h"
+#import "AudioSynthesis.h"
 
 @interface AudioManager ()
 {
@@ -19,21 +20,35 @@
     float FMCarrierPhase;
     float FMModulatorPhase;
     float AMPhase;
+    float SquareLFOPhase;
+    float SinLFOPhase;
     
     float FMCarrierFreq;
     float FMModulatorFreq;
     float AMFreq;
+    float SquareLFOFreq;
+    float SinLFOFreq;
     
     float masterGain;
     
     float FMCarrierGain;
     float FMModulatorGain;
     float AMGain;
+    float SquareLFOGain;
+    float SinLFOGain;
     
     float masterSamp;
     float FMCarrierSamp;
     float FMModulatorSamp;
     float AMSamp;
+    float SquareLFOSamp;
+    float SinLFOSamp;
+    
+    float FMCarrierPhaseRate;
+    float FMModulatorPhaseRate;
+    float AMPhaseRate;
+    float SinLFOPhaseRate;
+    float SquareLFOPhaseRate;
     
     int synthesisState;
 }
@@ -64,14 +79,27 @@
     FMCarrierPhase = 0;
     FMModulatorPhase = 0;
     AMPhase = 0;
+    SquareLFOPhase = 0;
+    SinLFOPhase = 0;
     
     FMModulatorFreq = 500;
     FMCarrierFreq = 230;
-    AMFreq = 10;
+    AMFreq = 1000;
+    SquareLFOFreq = 1;
+    SinLFOFreq = 0.5;
     
     masterGain = 0.9;
     FMModulatorGain = 10.0;
     FMCarrierGain = 0.55;
+    AMGain = 1.0;
+    SquareLFOGain = 1.0;
+    SinLFOGain = 1.0;
+    
+    FMCarrierPhaseRate = (FMCarrierFreq/SRATE);
+    FMModulatorPhaseRate = FMModulatorFreq/SRATE;
+    AMPhaseRate = AMFreq/SRATE;
+    SinLFOPhaseRate = SinLFOFreq/SRATE;
+    SquareLFOPhaseRate = SquareLFOFreq/SRATE;
     
     [_audioController addChannels:@[[AEBlockChannel channelWithBlock: ^(const AudioTimeStamp *time,
                                                                        UInt32 frames,
@@ -79,15 +107,24 @@
         
         for(int i = 0; i < frames; i++)
         {
-            // add in ability for more waveforms in future
-            
             FMCarrierSamp = sin(2*M_PI*FMCarrierPhase) * FMCarrierGain;
             FMModulatorSamp = sin(2*M_PI*FMModulatorPhase) * FMModulatorGain;
             AMSamp = sin(2*M_PI*AMPhase) * AMGain;
             
-            FMCarrierPhase += (FMCarrierFreq/SRATE) * FMCarrierGain ;
-            FMModulatorPhase += FMModulatorFreq/SRATE * FMModulatorGain;
-            AMPhase += AMFreq/SRATE;
+            if (SquareLFOPhase > 0.5) {
+                SquareLFOSamp = SquareLFOGain;
+            }
+            else {
+                SquareLFOSamp = -SquareLFOGain;
+            }
+            
+            SinLFOSamp = sin(2*M_PI*SinLFOPhase) * SinLFOGain;
+            
+            FMCarrierPhase += FMCarrierPhaseRate;
+            FMModulatorPhase += FMModulatorPhaseRate;
+            AMPhase += AMPhaseRate;
+            SinLFOPhase += SinLFOPhaseRate;
+            SquareLFOPhase += SquareLFOPhaseRate;
             
             if(FMCarrierPhase > 1)
                 FMCarrierPhase -= 1;
@@ -95,8 +132,11 @@
                 FMModulatorPhase -= 1;
             if(AMPhase > 1)
                 AMPhase -= 1;
+            if(SquareLFOPhase > 1)
+                SquareLFOPhase -= 1;
+            if(SinLFOPhase > 1)
+                SinLFOPhase -= 1;
             
-            // currently AM is disabled
             switch (synthesisState) {
                 case OFF:
                     masterSamp = 0;
@@ -104,23 +144,23 @@
                     
                 case ONLY_CARRIER:
                     //
-                    masterSamp = FMCarrierPhase * masterGain;
+                    masterSamp = FMCarrierSamp * masterGain;
                     break;
                     
                 case FM_ACTIVE:
-                    masterSamp = (FMCarrierPhase + FMModulatorPhase) * masterGain;
+                    masterSamp = (FMCarrierSamp + FMModulatorSamp) * 0.5 * masterGain;
                     break;
                     
                 case AM_ACTIVE:
-                    masterSamp = (FMCarrierPhase + FMModulatorPhase) * AMPhase * masterGain;
+                    masterSamp = (FMCarrierSamp + FMModulatorSamp) * 0.5 * AMSamp * masterGain;
                     break;
                     
                 case FOUR_FINGER:
-                    masterSamp = (FMCarrierPhase + FMModulatorPhase) * AMPhase * masterGain;
+                    masterSamp = (FMCarrierSamp + FMModulatorSamp) * 0.5 * AMSamp * SquareLFOSamp * masterGain;
                     break;
                     
                 case FIVE_FINGER:
-                    masterSamp = (FMCarrierPhase + FMModulatorPhase) * AMPhase * masterGain;
+                    masterSamp = (FMCarrierSamp+ FMModulatorSamp) * 0.5 *  AMSamp* SinLFOSamp * masterGain;
                     break;
                     
                 default:
@@ -193,11 +233,3 @@
 }
 
 @end
-
-
-
-
-
-
-
-
