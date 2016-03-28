@@ -31,10 +31,10 @@
     [self.motionManager startDeviceMotionUpdatesUsingReferenceFrame:CMAttitudeReferenceFrameXTrueNorthZVertical
                                                             toQueue:[NSOperationQueue mainQueue]
                                                         withHandler:^(CMDeviceMotion * motion, NSError * error) {
-//                                                            NSLog(@"attitude: %f %f %f",
-//                                                                  motion.attitude.pitch,
-//                                                                  motion.attitude.roll,
-//                                                                  motion.attitude.yaw);
+                                                            NSLog(@"attitude: %f %f %f",
+                                                                  motion.attitude.pitch,
+                                                                  motion.attitude.roll,
+                                                                  motion.attitude.yaw);
                                                             AudioManager *audioManager = [AudioManager instance];
                                                             [audioManager setFMCarrierFreq:2500+1300*motion.attitude.pitch/(M_PI*2)];
                                                             [audioManager setFMModulatorFreq:2500+1200*motion.attitude.roll/(M_PI*2)];

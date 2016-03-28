@@ -95,11 +95,7 @@
     SquareLFOGain = 1.0;
     SinLFOGain = 1.0;
     
-    FMCarrierPhaseRate = (FMCarrierFreq/SRATE);
-    FMModulatorPhaseRate = FMModulatorFreq/SRATE;
-    AMPhaseRate = AMFreq/SRATE;
-    SinLFOPhaseRate = SinLFOFreq/SRATE;
-    SquareLFOPhaseRate = SquareLFOFreq/SRATE;
+    
     
     [_audioController addChannels:@[[AEBlockChannel channelWithBlock: ^(const AudioTimeStamp *time,
                                                                        UInt32 frames,
@@ -107,6 +103,12 @@
         
         for(int i = 0; i < frames; i++)
         {
+            FMCarrierPhaseRate = (FMCarrierFreq/SRATE);
+            FMModulatorPhaseRate = FMModulatorFreq/SRATE;
+            AMPhaseRate = AMFreq/SRATE;
+            SinLFOPhaseRate = SinLFOFreq/SRATE;
+            SquareLFOPhaseRate = SquareLFOFreq/SRATE;
+            
             FMCarrierSamp = sin(2*M_PI*FMCarrierPhase) * FMCarrierGain;
             FMModulatorSamp = sin(2*M_PI*FMModulatorPhase) * FMModulatorGain;
             AMSamp = sin(2*M_PI*AMPhase) * AMGain;
