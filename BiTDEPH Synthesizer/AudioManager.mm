@@ -8,6 +8,8 @@
 #define AM_ACTIVE 3
 #define FOUR_FINGER 4
 #define FIVE_FINGER 5
+#define SIX_FINGER 6
+#define SEVEN_FINGER 7
 
 #import "AudioManager.h"
 #import "AudioGenerators.h"
@@ -17,26 +19,16 @@
     AEAudioController *_audioController;
     
     // why are these declared here instead of in the .h file?
-    float FMCarrierPhase;
-    float FMModulatorPhase;
-    float AMPhase;
-    
-    float FMCarrierFreq;
-    float FMModulatorFreq;
-    float AMFreq;
-    
     float masterGain;
-    
-    float FMCarrierGain;
-    float FMModulatorGain;
-    float AMGain;
-    
     float masterSamp;
-    float FMCarrierSamp;
-    float FMModulatorSamp;
-    float AMSamp;
     
     int synthesisState;
+    
+    SinOsc Carrier;
+    SinOsc FMModulator;
+    SinOsc AMModulator;
+    SawOsc LFOSAW;
+    SqrOsc LFOSQR;
 }
 
 @end
@@ -62,17 +54,12 @@
                                                               inputEnabled:NO];
     _audioController.preferredBufferDuration = 0.005;
     
-    FMCarrierPhase = 0;
-    FMModulatorPhase = 0;
-    AMPhase = 0;
-    
-    FMModulatorFreq = 500;
-    FMCarrierFreq = 230;
-    AMFreq = 10;
-    
     masterGain = 0.9;
-    FMModulatorGain = 10.0;
-    FMCarrierGain = 0.55;
+    FMModulator.setGain(100);
+    Carrier.setFreq(200);
+    AMModulator.setFreq(10);
+    LFOSAW.setFreq(5);
+    LFOSQR.setFreq(2);
     
     [_audioController addChannels:@[[AEBlockChannel channelWithBlock: ^(const AudioTimeStamp *time,
                                                                        UInt32 frames,
@@ -80,23 +67,6 @@
         
         for(int i = 0; i < frames; i++)
         {
-            // add in ability for more waveforms in future
-            
-            FMCarrierSamp = sin(2*M_PI*FMCarrierPhase) * FMCarrierGain;
-            FMModulatorSamp = sin(2*M_PI*FMModulatorPhase) * FMModulatorGain;
-            AMSamp = sin(2*M_PI*AMPhase) * AMGain;
-            
-            FMCarrierPhase += (FMCarrierFreq/SRATE) * FMCarrierGain ;
-            FMModulatorPhase += FMModulatorFreq/SRATE * FMModulatorGain;
-            AMPhase += AMFreq/SRATE;
-            
-            if(FMCarrierPhase > 1)
-                FMCarrierPhase -= 1;
-            if(FMModulatorPhase > 1)
-                FMModulatorPhase -= 1;
-            if(AMPhase > 1)
-                AMPhase -= 1;
-            
             // currently AM is disabled
             switch (synthesisState) {
                 case OFF:
@@ -105,87 +75,87 @@
                     
                 case ONLY_CARRIER:
                     //
-                    masterSamp = FMCarrierPhase * masterGain;
+                    masterSamp = Carrier.tick();
                     break;
                     
                 case FM_ACTIVE:
-                    masterSamp = (FMCarrierPhase + FMModulatorPhase) * masterGain;
+                    Carrier.setFreq(FMModulator.tick() + 300);
+                    masterSamp = (Carrier.tick());
                     break;
                     
                 case AM_ACTIVE:
-                    masterSamp = (FMCarrierPhase + FMModulatorPhase) * AMPhase * masterGain;
+                    masterSamp = (Carrier.tick() + FMModulator.tick()) * AMModulator.tick();
                     break;
                     
                 case FOUR_FINGER:
-                    masterSamp = (FMCarrierPhase + FMModulatorPhase) * AMPhase * masterGain;
+                    masterSamp = (Carrier.tick() + FMModulator.tick()) + (AMModulator.tick() * LFOSQR.tick());
                     break;
                     
                 case FIVE_FINGER:
-                    masterSamp = (FMCarrierPhase + FMModulatorPhase) * AMPhase * masterGain;
+                    masterSamp = (Carrier.tick() + FMModulator.tick()) * AMModulator.tick() + (LFOSQR.tick() * ((1 + LFOSAW.tick())/2));
                     break;
                     
                 default:
-                    masterSamp = 0;
-                    break;
+                    synthesisState = FIVE_FINGER;
             }
             
-            ((float*)(audio->mBuffers[0].mData))[i] = masterSamp;
-            ((float*)(audio->mBuffers[1].mData))[i] = masterSamp;
+            ((float*)(audio->mBuffers[0].mData))[i] = masterSamp * masterGain;
+            ((float*)(audio->mBuffers[1].mData))[i] = masterSamp * masterGain;
         }
         
     }]]];
     
     [_audioController start:NULL];
 }
-
+     
 - (void)setFMCarrierGain:(float)gain
 {
-    FMCarrierGain = gain;
+    FMModulator.setGain(gain);
 }
-
+              
 - (void)setFMModulatorGain:(float)gain
 {
-    FMModulatorGain = gain;
+    FMModulator.setGain(gain);
 }
-
+              
 - (void)setAMGain:(float)gain
 {
-    AMGain = gain;
+    AMModulator.setGain(gain);
 }
-
+              
 - (void)setMasterGain:(float)gain
 {
     masterGain = gain;
 }
-
+              
 - (void)setFMCarrierFreq:(float)freq
 {
-    FMCarrierFreq = freq;
+    Carrier.setFreq(freq);
 }
-
+              
 - (void)setFMModulatorFreq:(float)freq
 {
-    FMModulatorFreq = freq;
+    FMModulator.setFreq(freq);
 }
-
+            
 - (void)setAMFreq:(float)freq
 {
-    AMFreq = freq;
+    AMModulator.setFreq(freq);
 }
-
+              
 - (float)getFMCarrierFreq
 {
-    return FMCarrierFreq;
+    return Carrier.getFreq();
 }
-
+                  
 - (float)getFMModulatorFreq
 {
-    return FMModulatorFreq;
+    return FMModulator.getFreq();
 }
-
+                  
 - (float)getAMModulatorFreq
 {
-    return AMFreq;
+    return AMModulator.getFreq();
 }
 
 - (void)setSynthesisState:(int)state
@@ -194,9 +164,6 @@
 }
 
 @end
-
-
-
 
 
 

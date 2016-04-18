@@ -430,7 +430,7 @@ void Pizza::draw()
         bool success;
         GLKVector3 vec = GLKMathUnproject(GLKVector3Make(p.x, self.view.bounds.size.height-p.y, 0.1),
                                           modelView, projection, viewport, &success);
-        NSLog(@"move: %f %f %f", vec.x, vec.y, vec.z);
+        //NSLog(@"move: %f %f %f", vec.x, vec.y, vec.z);
         
         touchPizzas[touch]->setPosition(vec.x, vec.y, vec.z);
     }
@@ -452,7 +452,7 @@ void Pizza::draw()
         bool success;
         GLKVector3 vec = GLKMathUnproject(GLKVector3Make(p.x, self.view.bounds.size.height-p.y, 0.1),
                                           modelView, projection, viewport, &success);
-        NSLog(@"end: %f %f %f", vec.x, vec.y, vec.z);
+        //NSLog(@"end: %f %f %f", vec.x, vec.y, vec.z);
         
         renderList.remove(touchPizzas[touch]);
         AudioManager *audioManager = [AudioManager instance];
