@@ -30,5 +30,8 @@
 - (float)getFMModulatorFreq;
 - (float)getAMModulatorFreq;
 
+- (float *)lastAudioBuffer;
+- (int)lastAudioBufferSize;
+
 @end
 

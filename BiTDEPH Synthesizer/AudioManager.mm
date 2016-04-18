@@ -24,6 +24,9 @@
     
     int synthesisState;
     
+    float *_lastAudioBuffer;
+    int _lastAudioBufferSize;
+    
     SinOsc Carrier;
     SinOsc FMModulator;
     SinOsc AMModulator;
@@ -61,10 +64,13 @@
     LFOSAW.setFreq(5);
     LFOSQR.setFreq(2);
     
+    _lastAudioBufferSize = MY_COOL_SRATE * _audioController.preferredBufferDuration * 4;
+    _lastAudioBuffer = new float[_lastAudioBufferSize];
+    
     [_audioController addChannels:@[[AEBlockChannel channelWithBlock: ^(const AudioTimeStamp *time,
                                                                        UInt32 frames,
                                                                        AudioBufferList *audio) {
-        
+        _lastAudioBufferSize = frames;
         for(int i = 0; i < frames; i++)
         {
             // currently AM is disabled
@@ -99,6 +105,7 @@
                     synthesisState = FIVE_FINGER;
             }
             
+            _lastAudioBuffer[i] = masterSamp;
             ((float*)(audio->mBuffers[0].mData))[i] = masterSamp * masterGain;
             ((float*)(audio->mBuffers[1].mData))[i] = masterSamp * masterGain;
         }
@@ -161,6 +168,14 @@
 - (void)setSynthesisState:(int)state
 {
     synthesisState = state;
+}
+
+- (float *)lastAudioBuffer {
+    return _lastAudioBuffer;
+}
+
+- (int)lastAudioBufferSize {
+    return _lastAudioBufferSize;
 }
 
 @end
