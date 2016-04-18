@@ -10,6 +10,7 @@
 #define FIVE_FINGER 5
 
 #import "AudioManager.h"
+#import "AudioGenerators.h"
 
 @interface AudioManager ()
 {
