@@ -10,6 +10,9 @@
 #define FIVE_FINGER 5
 #define SIX_FINGER 6
 #define SEVEN_FINGER 7
+#define EIGHT_FINGER 8
+#define NINE_FINGER 9
+#define TEN_FINGER 10
 
 #import "AudioManager.h"
 #import "AudioGenerators.h"
@@ -93,12 +96,27 @@
                     break;
                     
                 case FOUR_FINGER:
-                    _masterSamp = (Carrier.tick() + FMModulator.tick()) + (AMModulator.tick()) * 0.0033 * LFOSQR.tick();
+                    _masterSamp = ((Carrier.tick() * FMModulator.tick()) * 0.002) + ((AMModulator.tick() * LFOSQR.tick()) * 0.5);
                     break;
                     
                 case FIVE_FINGER:
                     _masterSamp = (Carrier.tick() + FMModulator.tick()) * 0.0025 * (AMModulator.tick() + LFOSAW.tick());
                     break;
+                    
+                case SIX_FINGER:
+                    synthesisState = FIVE_FINGER;
+                    
+                case SEVEN_FINGER:
+                    synthesisState = FIVE_FINGER;
+                
+                case EIGHT_FINGER:
+                    synthesisState = FIVE_FINGER;
+                
+                case NINE_FINGER:
+                    synthesisState = FIVE_FINGER;
+                    
+                case TEN_FINGER:
+                    synthesisState = FIVE_FINGER;
                     
                 default:
                     synthesisState = FIVE_FINGER;

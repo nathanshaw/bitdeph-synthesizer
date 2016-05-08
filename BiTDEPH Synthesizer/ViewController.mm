@@ -15,7 +15,6 @@
 #import <list>
 #import <map>
 
-
 #define WAVEFORM_GEO_SIZE 2048
 
 // global variables for now
@@ -89,12 +88,26 @@ private:
     float x, y, z;
     float rotation;
     
+    int flareColorNum = 10;
+    GLKVector3 _flareColors[10] = {
+        {1.0, 0.0, 0.0},
+        {0.0, 1.0, 0.0},
+        {0.0, 0.0, 1.0},
+        {1.0, 0.0, 1.0},
+        {0.0, 1.0, 1.0},
+        {1.0, 1.0, 0.0},
+        {1.0, 1.0, 1.0},
+        {0.75, 0.0, 0.5},
+        {0.66, 0.33, 1},
+        {0.0, 0.85, 0.4}
+    };
     // geometry
     GLfloat geo[4*2];
     // texture coordinates
     GLfloat texcoord[4*2];
     // pointer to texture
     GLuint tex;
+    
 };
 
 
@@ -123,47 +136,11 @@ Flare::Flare()
 Flare::Flare(float width, float height, int touchNum)
 {
     tex = loadOrRetrieveTexture(@"flare.png");
-    int randomColor = (int)Random::range(1, 7.99);
-    switch (randomColor) {
-        case 1:
-            r = 0;
-            g = b = a = 1;
-            break;
-            
-        case 2:
-            g = 0;
-            r = b = a = 1;
-            break;
-            
-        case 3:
-            b = 0;
-            g = r = a = 1;
-            break;
-            
-        case 4:
-            b = g = 0;
-            r = a = 1;
-            break;
-            
-        case 5:
-            g = r = 0;
-            b = a = 1;
-            break;
-            
-        case 6:
-            r = b = 0;
-            a = g = 1;
-            break;
-            
-        case 7:
-            g = b = 0;
-            a = r = 1;
-            break;
-            
-        default:
-            r = g = b = a = 1;
-            break;
-    }
+    GLKVector3 _color = _flareColors[(int)(Random::unit()*flareColorNum)];
+    r = _color.x;
+    g = _color.y;
+    b = _color.z;
+    a = 1;
     
     x = y = z = 0;
     // lower left corner
@@ -243,6 +220,8 @@ void Flare::draw()
     GLKVector2 _waveFormGeo3[WAVEFORM_GEO_SIZE];
     GLKVector2 _waveFormGeo4[WAVEFORM_GEO_SIZE];
     GLKVector2 _waveFormGeo5[WAVEFORM_GEO_SIZE];
+    
+
 }
 
 @property (strong, nonatomic) EAGLContext *context;
