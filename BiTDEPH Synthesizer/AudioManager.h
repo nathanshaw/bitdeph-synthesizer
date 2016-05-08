@@ -26,9 +26,13 @@
 
 - (void)setMasterGain:(float)gain;
 
+- (float)getMasterGain;
 - (float)getFMCarrierFreq;
 - (float)getFMModulatorFreq;
 - (float)getAMModulatorFreq;
+
+- (float *)lastAudioBuffer;
+- (int)lastAudioBufferSize;
 
 @end
 

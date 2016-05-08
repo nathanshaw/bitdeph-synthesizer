@@ -36,9 +36,9 @@
 //                                                                  motion.attitude.roll,
 //                                                                  motion.attitude.yaw);
                                                             AudioManager *audioManager = [AudioManager instance];
-                                                            [audioManager setFMCarrierFreq:2500+1300*motion.attitude.pitch/(M_PI*2)];
-                                                            [audioManager setFMModulatorFreq:2500+1200*motion.attitude.roll/(M_PI*2)];
-                                                            [audioManager setAMFreq:300+200*motion.attitude.yaw/(M_PI*2)];
+                                                            [audioManager setFMCarrierFreq: 200+3300*motion.attitude.pitch/(M_PI*2)];
+                                                            [audioManager setFMModulatorFreq:200+5200*motion.attitude.roll/(M_PI*2)];
+                                                            [audioManager setAMFreq:30 + 2000*motion.attitude.yaw/(M_PI*2)];
                                                         }];
     
     return YES;
@@ -64,16 +64,6 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-}
-
-- (void)setLabelValue_1:(UIApplication *)application {
-    //// blah blah;
-}
-- (void)setLabelValue_2:(UIApplication *)application {
-    //// blah blah;
-}
-- (void)setLabelValue_3:(UIApplication *)application {
-    //// blah blah;
 }
 
 @end

@@ -129,12 +129,8 @@
 		D852BFB81C6D723100330951 /* BiTDEPH Synthesizer */ = {
 			isa = PBXGroup;
 			children = (
-				D852BFE51C6D73DE00330951 /* AudioManager.h */,
-				D852BFE61C6D73DE00330951 /* AudioManager.mm */,
-				D8EF8C891CC5749600E0E78A /* AudioGenerators.h */,
-				D8EF8C8A1CC5749600E0E78A /* AudioGenerators.cpp */,
-				D80C3B051C9A01BB0056C1CD /* ShaderHelper.h */,
-				D80C3B061C9A01BB0056C1CD /* ShaderHelper.mm */,
+				D8EF8C901CC583BD00E0E78A /* Audio */,
+				D8EF8C911CC583D200E0E78A /* GL */,
 				D852BFBC1C6D723100330951 /* AppDelegate.h */,
 				D852BFBD1C6D723100330951 /* AppDelegate.m */,
 				D852BFBF1C6D723100330951 /* ViewController.h */,
@@ -143,14 +139,7 @@
 				D852BFC51C6D723100330951 /* Assets.xcassets */,
 				D852BFC71C6D723100330951 /* LaunchScreen.storyboard */,
 				D852BFCA1C6D723100330951 /* Info.plist */,
-				D80C3B0A1C9A01CD0056C1CD /* Shader.vsh */,
-				D80C3B0B1C9A01CD0056C1CD /* Shader.fsh */,
-				D80C3B0C1C9A01CD0056C1CD /* Texture.h */,
-				D80C3B0D1C9A01CD0056C1CD /* Texture.mm */,
-				D80C3B0E1C9A01CD0056C1CD /* TextureShader.vsh */,
-				D80C3B0F1C9A01CD0056C1CD /* TextureShader.fsh */,
-				D80C3B151C9A06C00056C1CD /* pizza.png */,
-				D80C3B161C9A06C00056C1CD /* flare.png */,
+				D8EF8C921CC583F100E0E78A /* media */,
 				D852BFB91C6D723100330951 /* Supporting Files */,
 			);
 			path = "BiTDEPH Synthesizer";
@@ -172,6 +161,41 @@
 				D852BFDB1C6D728D00330951 /* libTheAmazingAudioEngine tvOS.a */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		D8EF8C901CC583BD00E0E78A /* Audio */ = {
+			isa = PBXGroup;
+			children = (
+				D852BFE51C6D73DE00330951 /* AudioManager.h */,
+				D852BFE61C6D73DE00330951 /* AudioManager.mm */,
+				D8EF8C891CC5749600E0E78A /* AudioGenerators.h */,
+				D8EF8C8A1CC5749600E0E78A /* AudioGenerators.cpp */,
+			);
+			name = Audio;
+			sourceTree = "<group>";
+		};
+		D8EF8C911CC583D200E0E78A /* GL */ = {
+			isa = PBXGroup;
+			children = (
+				D80C3B051C9A01BB0056C1CD /* ShaderHelper.h */,
+				D80C3B061C9A01BB0056C1CD /* ShaderHelper.mm */,
+				D80C3B0A1C9A01CD0056C1CD /* Shader.vsh */,
+				D80C3B0B1C9A01CD0056C1CD /* Shader.fsh */,
+				D80C3B0C1C9A01CD0056C1CD /* Texture.h */,
+				D80C3B0D1C9A01CD0056C1CD /* Texture.mm */,
+				D80C3B0E1C9A01CD0056C1CD /* TextureShader.vsh */,
+				D80C3B0F1C9A01CD0056C1CD /* TextureShader.fsh */,
+			);
+			name = GL;
+			sourceTree = "<group>";
+		};
+		D8EF8C921CC583F100E0E78A /* media */ = {
+			isa = PBXGroup;
+			children = (
+				D80C3B151C9A06C00056C1CD /* pizza.png */,
+				D80C3B161C9A06C00056C1CD /* flare.png */,
+			);
+			name = media;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -361,7 +385,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -399,7 +423,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -411,11 +435,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				HEADER_SEARCH_PATHS = $PROJECT_DIR/TheAmazingAudioEngine;
 				INFOPLIST_FILE = "BiTDEPH Synthesizer/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "BiTDEPH.BiTDEPH-Synthesizer";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -423,11 +450,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				HEADER_SEARCH_PATHS = $PROJECT_DIR/TheAmazingAudioEngine;
 				INFOPLIST_FILE = "BiTDEPH Synthesizer/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "BiTDEPH.BiTDEPH-Synthesizer";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

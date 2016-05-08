@@ -1,10 +1,8 @@
-//
 //  ViewController.m
 //  BiTDEPH Synthesizer
 //
 //  Created by Nathan Villicaña-Shaw on 2/11/16.
 //  Copyright © 2016 Nathan Villicaña-Shaw. All rights reserved.
-//
 
 #import "ViewController.h"
 #import "ShaderHelper.h"
@@ -15,6 +13,8 @@
 #import <vector>
 #import <list>
 #import <map>
+
+#define WAVEFORM_GEO_SIZE 2048
 
 // global variables for now
 // TODO: put into some sort of object state
@@ -31,24 +31,28 @@ GLKMatrix4 projection;
 GLKMatrix4 modelView;
 
 int activeTouches = 0;
+int fadeOutRenderNum = 0;
+
 
 class RenderObject
 {
 public:
     virtual void update() = 0;
     virtual void draw() = 0;
+    virtual void fadeOutUpdate() = 0;
 };
 
 
-
-class Rectangle : public RenderObject
+class Flare : public RenderObject
 {
 public:
-    Rectangle();
-    Rectangle(float width, float height);
+    Flare();
+    Flare(float width, float height, int touchNum);
     
     virtual void update();
     virtual void draw();
+    
+    void fadeOutUpdate();
     
     void setColor(float _r, float _g, float _b, float _a)
     {
@@ -58,96 +62,12 @@ public:
         a = _a;
     }
     
-    void setPosition(float _x, float _y, float _z)
-    {
-        x = _x;
-        y = _y;
-        z = _z;
+    void setAlpha(float _a) {
+        a = _a;
     }
     
-private:
-    float r, g, b, a;
-    float x, y, z;
-    
-    GLfloat geo[4*2];
-};
-
-Rectangle::Rectangle()
-{
-    float width = 1;
-    float height = 1;
-    
-    r = g = b = a = 1;
-    x = y = z = 0;
-    
-    // lower left corner
-    geo[0] = -width/2.0; geo[1] = -height/2.0;
-    // lower right corner
-    geo[2] =  width/2.0; geo[3] = -height/2.0;
-    // top left corner
-    geo[4] = -width/2.0; geo[5] =  height/2.0;
-    // upper right corner
-    geo[6] =  width/2.0; geo[7] =  height/2.0;
-}
-
-Rectangle::Rectangle(float width, float height)
-{
-    r = g = b = a = 1;
-    x = y = z = 0;
-    
-    // lower left corner
-    geo[0] = -width/2.0; geo[1] = -height/2.0;
-    // lower right corner
-    geo[2] =  width/2.0; geo[3] = -height/2.0;
-    // top left corner
-    geo[4] = -width/2.0; geo[5] =  height/2.0;
-    // upper right corner
-    geo[6] =  width/2.0; geo[7] =  height/2.0;
-}
-
-void Rectangle::update()
-{
-    
-}
-
-void Rectangle::draw()
-{
-    glUseProgram(_shaderProgram);
-    
-    //GLKMatrix4Translate(GLKMatrix4 matrix, float tx, float ty, float tz)
-    //GLKMatrix4Scale(GLKMatrix4 matrix, float sx, float sy, float sz)
-    GLKMatrix4 myModelView = GLKMatrix4Translate(modelView, x, y, z);
-    
-    glVertexAttribPointer(GLKVertexAttribPosition, 2, GL_FLOAT, GL_FALSE, 0, geo);
-    glEnableVertexAttribArray(GLKVertexAttribPosition);
-    
-    glVertexAttrib4f(GLKVertexAttribColor, r, g, b, a);
-    glVertexAttrib3f(GLKVertexAttribNormal, 0, 0, 1);
-    
-    GLKMatrix4 mvp = GLKMatrix4Multiply(projection, myModelView);
-    GLKMatrix3 normalMatrix = GLKMatrix3InvertAndTranspose(GLKMatrix4GetMatrix3(myModelView), NULL);
-    glUniformMatrix4fv(_mvpUniform, 1, GL_FALSE, mvp.m);
-    glUniformMatrix3fv(_normalMatrixUniform, 1, GL_FALSE, normalMatrix.m);
-    
-    glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-}
-
-
-class Pizza : public RenderObject
-{
-public:
-    Pizza();
-    Pizza(float width, float height);
-    
-    virtual void update();
-    virtual void draw();
-    
-    void setColor(float _r, float _g, float _b, float _a)
-    {
-        r = _r;
-        g = _g;
-        b = _b;
-        a = _a;
+    float getAlpha() {
+        return a;
     }
     
     void setPosition(float _x, float _y, float _z)
@@ -175,12 +95,13 @@ private:
     GLuint tex;
 };
 
-Pizza::Pizza()
+
+Flare::Flare()
 {
-    tex = loadOrRetrieveTexture(@"pizza.png");
+    tex = loadOrRetrieveTexture(@"flare.png");
     
-    float width = 1;
-    float height = 1;
+    float width = 0.5;
+    float height = 0.5;
     
     r = g = b = a = 1;
     x = y = z = 0;
@@ -197,13 +118,52 @@ Pizza::Pizza()
     rotation = 0;
 }
 
-Pizza::Pizza(float width, float height)
+Flare::Flare(float width, float height, int touchNum)
 {
-    tex = loadOrRetrieveTexture(@"pizza.png");
+    tex = loadOrRetrieveTexture(@"flare.png");
+    // int randomColor =
+    switch (touchNum) {
+        case 1:
+            r = 0;
+            g = b = a = 1;
+            break;
+            
+        case 2:
+            g = 0;
+            r = b = a = 1;
+            break;
+            
+        case 3:
+            b = 0;
+            g = r = a = 1;
+            break;
+            
+        case 4:
+            b = g = 0;
+            r = a = 1;
+            break;
+            
+        case 5:
+            g = r = 0;
+            b = a = 1;
+            break;
+            
+        case 6:
+            r = b = 0;
+            a = g = 1;
+            break;
+            
+        case 7:
+            g = b = 0;
+            a = r = 1;
+            break;
+            
+        default:
+            r = g = b = a = 1;
+            break;
+    }
     
-    r = g = b = a = 1;
     x = y = z = 0;
-    
     // lower left corner
     geo[0] = -width/2.0; geo[1] = -height/2.0;
     // lower right corner
@@ -222,12 +182,18 @@ Pizza::Pizza(float width, float height)
     rotation = 0;
 }
 
-void Pizza::update()
+void Flare::update()
 {
-    rotation += M_PI*2/60.0;
+    rotation += M_PI/60.0;
 }
 
-void Pizza::draw()
+void Flare::fadeOutUpdate()
+{
+    rotation += M_PI/120;
+    a = a * 0.992;
+}
+
+void Flare::draw()
 {
     glUseProgram(_texShaderProgram);
     
@@ -258,15 +224,21 @@ void Pizza::draw()
     glUniformMatrix3fv(_texNormalMatrixUniform, 1, GL_FALSE, normalMatrix.m);
     
     glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-    glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-    glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 }
 @interface ViewController ()
 {
     float _rotation [4];
     
     std::list<RenderObject *> renderList;
-    std::map<UITouch *, Pizza *> touchPizzas;
+    std::list<RenderObject *> fadeOutRenderList;
+    std::map<UITouch *, Flare *> touchFlares;
+    
+    GLKVector2 _mainWaveFormGeo[WAVEFORM_GEO_SIZE];
+    GLKVector2 _waveFormGeo1[WAVEFORM_GEO_SIZE];
+    GLKVector2 _waveFormGeo2[WAVEFORM_GEO_SIZE];
+    GLKVector2 _waveFormGeo3[WAVEFORM_GEO_SIZE];
+    GLKVector2 _waveFormGeo4[WAVEFORM_GEO_SIZE];
+    GLKVector2 _waveFormGeo5[WAVEFORM_GEO_SIZE];
 }
 
 @property (strong, nonatomic) EAGLContext *context;
@@ -297,49 +269,6 @@ void Pizza::draw()
     _texMvpUniform = glGetUniformLocation(_texShaderProgram, "modelViewProjectionMatrix");
     _texNormalMatrixUniform = glGetUniformLocation(_texShaderProgram, "normalMatrix");
     _texTexUniform = glGetUniformLocation(_texShaderProgram, "tex");
-    
-    // Rectangle *r;
-    
-    //    r = new Rectangle(1, 1);
-    //    r->setPosition(0, 0, 0);
-    //    r->setColor(0.11, 0.9, 0.09, 0.8);
-    //    
-    //    renderList.push_back(r);
-    //    
-    //    r = new Rectangle(0.25, 1.75);
-    //    r->setPosition(0, 0.62, 0);
-    //    r->setColor(0.9, 0.4, 0.12, 0.8);
-    //    
-    //    renderList.push_back(r);
-    //    
-    //    r = new Rectangle(1.2, 0.8);
-    //    r->setPosition(0, -0.62, 0);
-    //    r->setColor(0.6, 0.1, 0.9, 0.8);
-    //    
-    //    renderList.push_back(r);
-    
-    // GLuint tex = loadOrRetrieveTexture(@"pizza.png");
-    
-    //    Pizza *p = new Pizza(1, 1);
-    //    p->setColor(0.9, 0.4, 0.12, 0.8);
-    //    p->setPosition(0, 0, 0);
-    //    p->setTexture(tex);
-    //
-    //    renderList.push_back(p);
-    //    
-    //    p = new Pizza(1, 1);
-    //    p->setPosition(-0.5, 0.2, 0);
-    //    p->setColor(0.11, 0.9, 0.09, 0.8);
-    //    p->setTexture(tex);
-    //
-    //    renderList.push_back(p);
-    //    
-    //    p = new Pizza(1, 1);
-    //    p->setPosition(1.0, -0.7, 0);
-    //    p->setColor(0.6, 0.1, 0.9, 0.8);
-    //    p->setTexture(tex);
-    //
-    //    renderList.push_back(p);
 }
 
 - (void)setupGL
@@ -356,7 +285,6 @@ void Pizza::draw()
 }
 
 
-// update
 - (void)update
 {
     for (int i = 1; i <= 4; i++) {
@@ -365,8 +293,10 @@ void Pizza::draw()
     
     for(auto r = renderList.begin(); r != renderList.end(); r++)
         (*r)->update();
-    
-//    rekt.setPosition(sin(_rotation), 0, -0.101);
+
+    for(auto r = fadeOutRenderList.begin(); r != fadeOutRenderList.end(); r++) {
+        (*r)->fadeOutUpdate();
+    }
 }
 
 
@@ -379,7 +309,7 @@ void Pizza::draw()
     glDisable(GL_DEPTH_TEST);
     glEnable(GL_BLEND);
     // normal alpha blending
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    // glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     // additive blending
     glBlendFunc(GL_SRC_ALPHA, GL_ONE);
     
@@ -389,7 +319,46 @@ void Pizza::draw()
     modelView = GLKMatrix4Identity;
     modelView = GLKMatrix4Translate(modelView, 0, 0, -0.101);
     
+    
+    int audioFrameSize = [[AudioManager instance] lastAudioBufferSize];
+    assert (audioFrameSize <= WAVEFORM_GEO_SIZE);
+    
+    float *audioFrame = [[AudioManager instance] lastAudioBuffer];
+    
+    for(int i = 0; i < audioFrameSize; i++) {
+        // GL coordinates are -1 - 1
+        float x = ((float)i)/audioFrameSize * 2.0f - 1.0f;
+        _mainWaveFormGeo[i].x = x;
+        _mainWaveFormGeo[i].y = audioFrame[i];
+    }
+    
+    //render waveform
+    glUseProgram(_shaderProgram);
+    
+    // GLKVector2 waveformGeo[];
+    
+    glVertexAttribPointer(GLKVertexAttribPosition, 2, GL_FLOAT, GL_FALSE, 0, _mainWaveFormGeo);
+//    glVertexAttribPointer1(GLKVertexAttribPosition, 2, GL_FLOAT, GL_FALSE, 0, _waveFormGeo1);
+//    glVertexAttribPointer2(GLKVertexAttribPosition, 2, GL_FLOAT, GL_FALSE, 0, _waveFormGeo2);
+//    glVertexAttribPointer3(GLKVertexAttribPosition, 2, GL_FLOAT, GL_FALSE, 0, _waveFormGeo3);
+//        glVertexAttribPointer4(GLKVertexAttribPosition, 2, GL_FLOAT, GL_FALSE, 0, _waveFormGeo4);
+//        glVertexAttribPointer5(GLKVertexAttribPosition, 2, GL_FLOAT, GL_FALSE, 0, _waveFormGeo5);
+    glEnableVertexAttribArray(GLKVertexAttribPosition);
+    
+    // the color
+    glVertexAttrib3f(GLKVertexAttribColor, 0.9, 0.6, 0.7834);
+    
+    GLKMatrix4 mvp = GLKMatrix4Multiply(projection, modelView);
+    GLKMatrix3 normalMatrix = GLKMatrix3InvertAndTranspose(GLKMatrix4GetMatrix3(modelView), NULL);
+    glUniformMatrix4fv(_texMvpUniform, 1, GL_FALSE, mvp.m);
+    glUniformMatrix3fv(_texNormalMatrixUniform, 1, GL_FALSE, normalMatrix.m);
+    
+    glDrawArrays(GL_LINE_STRIP, 0, audioFrameSize);
+    
+    // render the Flares
     for(auto r = renderList.begin(); r != renderList.end(); r++)
+        (*r)->draw();
+    for(auto r = fadeOutRenderList.begin(); r != fadeOutRenderList.end(); r++)
         (*r)->draw();
 }
 
@@ -407,14 +376,13 @@ void Pizza::draw()
                                           modelView, projection, viewport, &success);
         NSLog(@"began: %f %f %f", vec.x, vec.y, vec.z);
         
-        touchPizzas[touch] = new Pizza(1, 1);
-        touchPizzas[touch]->setPosition(vec.x, vec.y, vec.z);
+        activeTouches = activeTouches + 1;
+        touchFlares[touch] = new Flare(1, 1, activeTouches);
+        touchFlares[touch]->setPosition(vec.x, vec.y, vec.z);
         
-        renderList.push_back(touchPizzas[touch]);
+        renderList.push_back(touchFlares[touch]);
         
         AudioManager *audioManager = [AudioManager instance];
-        activeTouches = activeTouches + 1;
-        //[audioManager setMasterGain:0.9];
         [audioManager setSynthesisState:activeTouches];
     }
 }
@@ -430,9 +398,9 @@ void Pizza::draw()
         bool success;
         GLKVector3 vec = GLKMathUnproject(GLKVector3Make(p.x, self.view.bounds.size.height-p.y, 0.1),
                                           modelView, projection, viewport, &success);
-        //NSLog(@"move: %f %f %f", vec.x, vec.y, vec.z);
+        // NSLog(@"move: %f %f %f", vec.x, vec.y, vec.z);
         
-        touchPizzas[touch]->setPosition(vec.x, vec.y, vec.z);
+        touchFlares[touch]->setPosition(vec.x, vec.y, vec.z);
     }
 }
 
@@ -449,12 +417,13 @@ void Pizza::draw()
         
         int viewport[] = { (int)self.view.bounds.origin.x, (int)self.view.bounds.origin.y,
             (int)self.view.bounds.size.width, (int)self.view.bounds.size.height };
-        bool success;
-        GLKVector3 vec = GLKMathUnproject(GLKVector3Make(p.x, self.view.bounds.size.height-p.y, 0.1),
-                                          modelView, projection, viewport, &success);
-        //NSLog(@"end: %f %f %f", vec.x, vec.y, vec.z);
+        // bool success;
+        //        GLKVector3 vec = GLKMathUnproject(GLKVector3Make(p.x, self.view.bounds.size.height-p.y, 0.1),
+        //                                          modelView, projection, viewport, &success);
         
-        renderList.remove(touchPizzas[touch]);
+        fadeOutRenderList.push_back(touchFlares[touch]);
+        fadeOutRenderNum += 1;
+        renderList.remove(touchFlares[touch]);
         AudioManager *audioManager = [AudioManager instance];
         activeTouches = activeTouches - 1;
         if (activeTouches < 0){activeTouches = 0;};

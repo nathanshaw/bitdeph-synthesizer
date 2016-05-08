@@ -19,10 +19,13 @@
     AEAudioController *_audioController;
     
     // why are these declared here instead of in the .h file?
-    float masterGain;
-    float masterSamp;
+    float _masterGain;
+    float _masterSamp;
     
     int synthesisState;
+    
+    float *_lastAudioBuffer;
+    int _lastAudioBufferSize;
     
     SinOsc Carrier;
     SinOsc FMModulator;
@@ -54,53 +57,57 @@
                                                               inputEnabled:NO];
     _audioController.preferredBufferDuration = 0.005;
     
-    masterGain = 0.9;
+    _masterGain = 0.9;
     FMModulator.setGain(100);
     Carrier.setFreq(200);
     AMModulator.setFreq(10);
     LFOSAW.setFreq(5);
     LFOSQR.setFreq(2);
     
+    _lastAudioBufferSize = MY_COOL_SRATE * _audioController.preferredBufferDuration * 4;
+    _lastAudioBuffer = new float[_lastAudioBufferSize];
+    
     [_audioController addChannels:@[[AEBlockChannel channelWithBlock: ^(const AudioTimeStamp *time,
                                                                        UInt32 frames,
                                                                        AudioBufferList *audio) {
-        
+        _lastAudioBufferSize = frames;
         for(int i = 0; i < frames; i++)
         {
             // currently AM is disabled
             switch (synthesisState) {
                 case OFF:
-                    masterSamp = 0;
+                    _masterSamp = 0;
                     break;
                     
                 case ONLY_CARRIER:
                     //
-                    masterSamp = Carrier.tick();
+                    _masterSamp = Carrier.tick();
                     break;
                     
                 case FM_ACTIVE:
                     Carrier.setFreq(FMModulator.tick() + 300);
-                    masterSamp = (Carrier.tick());
+                    _masterSamp = (Carrier.tick());
                     break;
                     
                 case AM_ACTIVE:
-                    masterSamp = (Carrier.tick() + FMModulator.tick()) * AMModulator.tick();
+                    _masterSamp = (Carrier.tick() + FMModulator.tick()) * AMModulator.tick();
                     break;
                     
                 case FOUR_FINGER:
-                    masterSamp = (Carrier.tick() + FMModulator.tick()) + (AMModulator.tick() * LFOSQR.tick());
+                    _masterSamp = (Carrier.tick() + FMModulator.tick()) + (AMModulator.tick() * LFOSQR.tick());
                     break;
                     
                 case FIVE_FINGER:
-                    masterSamp = (Carrier.tick() + FMModulator.tick()) * AMModulator.tick() + (LFOSQR.tick() * ((1 + LFOSAW.tick())/2));
+                    _masterSamp = (Carrier.tick() + FMModulator.tick()) * AMModulator.tick() + (LFOSQR.tick() * ((1 + LFOSAW.tick())/2));
                     break;
                     
                 default:
                     synthesisState = FIVE_FINGER;
             }
             
-            ((float*)(audio->mBuffers[0].mData))[i] = masterSamp * masterGain;
-            ((float*)(audio->mBuffers[1].mData))[i] = masterSamp * masterGain;
+            _lastAudioBuffer[i] = _masterSamp;
+            ((float*)(audio->mBuffers[0].mData))[i] = _masterSamp * _masterGain;
+            ((float*)(audio->mBuffers[1].mData))[i] = _masterSamp * _masterGain;
         }
         
     }]]];
@@ -125,7 +132,7 @@
               
 - (void)setMasterGain:(float)gain
 {
-    masterGain = gain;
+    _masterGain = gain;
 }
               
 - (void)setFMCarrierFreq:(float)freq
@@ -147,7 +154,12 @@
 {
     return Carrier.getFreq();
 }
-                  
+
+- (float)getMasterGain
+{
+    return _masterGain;
+}
+
 - (float)getFMModulatorFreq
 {
     return FMModulator.getFreq();
@@ -161,6 +173,14 @@
 - (void)setSynthesisState:(int)state
 {
     synthesisState = state;
+}
+
+- (float *)lastAudioBuffer {
+    return _lastAudioBuffer;
+}
+
+- (int)lastAudioBufferSize {
+    return _lastAudioBufferSize;
 }
 
 @end
