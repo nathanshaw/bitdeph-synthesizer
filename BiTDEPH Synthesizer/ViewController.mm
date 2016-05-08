@@ -9,10 +9,12 @@
 #import "Texture.h"
 
 #import "AudioManager.h"
+#import "Random.h"
 
 #import <vector>
 #import <list>
 #import <map>
+
 
 #define WAVEFORM_GEO_SIZE 2048
 
@@ -121,8 +123,8 @@ Flare::Flare()
 Flare::Flare(float width, float height, int touchNum)
 {
     tex = loadOrRetrieveTexture(@"flare.png");
-    // int randomColor =
-    switch (touchNum) {
+    int randomColor = (int)Random::range(1, 7.99);
+    switch (randomColor) {
         case 1:
             r = 0;
             g = b = a = 1;
@@ -225,6 +227,8 @@ void Flare::draw()
     
     glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 }
+
+
 @interface ViewController ()
 {
     float _rotation [4];
@@ -319,7 +323,6 @@ void Flare::draw()
     modelView = GLKMatrix4Identity;
     modelView = GLKMatrix4Translate(modelView, 0, 0, -0.101);
     
-    
     int audioFrameSize = [[AudioManager instance] lastAudioBufferSize];
     assert (audioFrameSize <= WAVEFORM_GEO_SIZE);
     
@@ -334,9 +337,6 @@ void Flare::draw()
     
     //render waveform
     glUseProgram(_shaderProgram);
-    
-    // GLKVector2 waveformGeo[];
-    
     glVertexAttribPointer(GLKVertexAttribPosition, 2, GL_FLOAT, GL_FALSE, 0, _mainWaveFormGeo);
 //    glVertexAttribPointer1(GLKVertexAttribPosition, 2, GL_FLOAT, GL_FALSE, 0, _waveFormGeo1);
 //    glVertexAttribPointer2(GLKVertexAttribPosition, 2, GL_FLOAT, GL_FALSE, 0, _waveFormGeo2);

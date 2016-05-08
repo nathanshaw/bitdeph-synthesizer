@@ -26,6 +26,7 @@
 		D852BFE21C6D72AB00330951 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D852BFE11C6D72AB00330951 /* AudioToolbox.framework */; };
 		D852BFE41C6D72B100330951 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D852BFE31C6D72B100330951 /* AVFoundation.framework */; };
 		D852BFE71C6D73DE00330951 /* AudioManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = D852BFE61C6D73DE00330951 /* AudioManager.mm */; };
+		D882282A1CDFB513007E14BF /* Random.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D88228281CDFB513007E14BF /* Random.cpp */; };
 		D8EF8C8B1CC5749600E0E78A /* AudioGenerators.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D8EF8C8A1CC5749600E0E78A /* AudioGenerators.cpp */; };
 /* End PBXBuildFile section */
 
@@ -87,6 +88,8 @@
 		D852BFE31C6D72B100330951 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		D852BFE51C6D73DE00330951 /* AudioManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioManager.h; sourceTree = "<group>"; };
 		D852BFE61C6D73DE00330951 /* AudioManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AudioManager.mm; sourceTree = "<group>"; };
+		D88228281CDFB513007E14BF /* Random.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Random.cpp; sourceTree = "<group>"; };
+		D88228291CDFB513007E14BF /* Random.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Random.h; sourceTree = "<group>"; };
 		D8EF8C891CC5749600E0E78A /* AudioGenerators.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioGenerators.h; sourceTree = "<group>"; };
 		D8EF8C8A1CC5749600E0E78A /* AudioGenerators.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AudioGenerators.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -135,6 +138,8 @@
 				D852BFBD1C6D723100330951 /* AppDelegate.m */,
 				D852BFBF1C6D723100330951 /* ViewController.h */,
 				D852BFC01C6D723100330951 /* ViewController.mm */,
+				D88228281CDFB513007E14BF /* Random.cpp */,
+				D88228291CDFB513007E14BF /* Random.h */,
 				D852BFC21C6D723100330951 /* Main.storyboard */,
 				D852BFC51C6D723100330951 /* Assets.xcassets */,
 				D852BFC71C6D723100330951 /* LaunchScreen.storyboard */,
@@ -313,6 +318,7 @@
 				D8EF8C8B1CC5749600E0E78A /* AudioGenerators.cpp in Sources */,
 				D852BFC11C6D723100330951 /* ViewController.mm in Sources */,
 				D852BFBE1C6D723100330951 /* AppDelegate.m in Sources */,
+				D882282A1CDFB513007E14BF /* Random.cpp in Sources */,
 				D852BFE71C6D73DE00330951 /* AudioManager.mm in Sources */,
 				D852BFBB1C6D723100330951 /* main.m in Sources */,
 				D80C3B121C9A01CD0056C1CD /* Texture.mm in Sources */,

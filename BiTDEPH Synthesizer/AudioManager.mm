@@ -18,7 +18,6 @@
 {
     AEAudioController *_audioController;
     
-    // why are these declared here instead of in the .h file?
     float _masterGain;
     float _masterSamp;
     
@@ -90,15 +89,15 @@
                     break;
                     
                 case AM_ACTIVE:
-                    _masterSamp = (Carrier.tick() + FMModulator.tick()) * AMModulator.tick();
+                    _masterSamp = (Carrier.tick() + FMModulator.tick()) * 0.005 * AMModulator.tick();
                     break;
                     
                 case FOUR_FINGER:
-                    _masterSamp = (Carrier.tick() + FMModulator.tick()) + (AMModulator.tick() * LFOSQR.tick());
+                    _masterSamp = (Carrier.tick() + FMModulator.tick()) + (AMModulator.tick()) * 0.0033 * LFOSQR.tick();
                     break;
                     
                 case FIVE_FINGER:
-                    _masterSamp = (Carrier.tick() + FMModulator.tick()) * AMModulator.tick() + (LFOSQR.tick() * ((1 + LFOSAW.tick())/2));
+                    _masterSamp = (Carrier.tick() + FMModulator.tick()) * 0.0025 * (AMModulator.tick() + LFOSAW.tick());
                     break;
                     
                 default:
