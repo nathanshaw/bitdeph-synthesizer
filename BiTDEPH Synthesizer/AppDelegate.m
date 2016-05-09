@@ -35,10 +35,10 @@
 //                                                                  motion.attitude.pitch,
 //                                                                  motion.attitude.roll,
 //                                                                  motion.attitude.yaw);
-                                                            AudioManager *audioManager = [AudioManager instance];
-                                                            [audioManager setFMCarrierFreq: 200+3300*motion.attitude.pitch/(M_PI*2)];
-                                                            [audioManager setFMModulatorFreq:200+5200*motion.attitude.roll/(M_PI*2)];
-                                                            [audioManager setAMFreq:30 + 2000*motion.attitude.yaw/(M_PI*2)];
+                                                             AudioManager *audioManager = [AudioManager instance];
+                                                             [audioManager setFMCarrierFreq: 100+4300*motion.attitude.pitch/(M_PI*2)];
+                                                             [audioManager setFMModulatorFreq:100+7200*motion.attitude.roll/(M_PI*2)];
+                                                             [audioManager setAMFreq:30 + 2000*motion.attitude.yaw/(M_PI*2)];
                                                         }];
     
     return YES;

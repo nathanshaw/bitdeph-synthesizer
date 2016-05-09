@@ -27,8 +27,15 @@
     int synthesisState;
     
     float *_lastAudioBuffer;
-    int _lastAudioBufferSize;
+
+    float *_lastVoice1Buffer;
+    float *_lastVoice2Buffer;
+    float *_lastVoice3Buffer;
+    float *_lastVoice4Buffer;
+    float *_lastVoice5Buffer;
     
+    int _lastAudioBufferSize;
+        
     SinOsc Carrier;
     SinOsc FMModulator;
     SinOsc AMModulator;
@@ -69,6 +76,12 @@
     _lastAudioBufferSize = MY_COOL_SRATE * _audioController.preferredBufferDuration * 4;
     _lastAudioBuffer = new float[_lastAudioBufferSize];
     
+    _lastVoice1Buffer = new float[_lastAudioBufferSize];
+    _lastVoice2Buffer = new float[_lastAudioBufferSize];
+    _lastVoice3Buffer = new float[_lastAudioBufferSize];
+    _lastVoice4Buffer = new float[_lastAudioBufferSize];
+    _lastVoice5Buffer = new float[_lastAudioBufferSize];
+    
     [_audioController addChannels:@[[AEBlockChannel channelWithBlock: ^(const AudioTimeStamp *time,
                                                                        UInt32 frames,
                                                                        AudioBufferList *audio) {
@@ -84,23 +97,28 @@
                 case ONLY_CARRIER:
                     //
                     _masterSamp = Carrier.tick();
+                    _lastVoice1Buffer[i] = _masterSamp;
                     break;
                     
                 case FM_ACTIVE:
                     Carrier.setFreq(FMModulator.tick() + 300);
                     _masterSamp = (Carrier.tick());
+                    _lastVoice2Buffer[i] = _masterSamp;
                     break;
                     
                 case AM_ACTIVE:
-                    _masterSamp = (Carrier.tick() + FMModulator.tick()) * 0.005 * AMModulator.tick();
+                    _masterSamp = (Carrier.tick() + FMModulator.tick()) * 0.01 * AMModulator.tick();
+                    _lastVoice3Buffer[i] = _masterSamp;
                     break;
                     
                 case FOUR_FINGER:
-                    _masterSamp = ((Carrier.tick() * FMModulator.tick()) * 0.002) + ((AMModulator.tick() * LFOSQR.tick()) * 0.5);
+                    _masterSamp = ((Carrier.tick() * FMModulator.tick()) * 0.008) + ((AMModulator.tick() * LFOSQR.tick()) * 0.5);
+                    _lastVoice4Buffer[i] = _masterSamp;
                     break;
                     
                 case FIVE_FINGER:
-                    _masterSamp = (Carrier.tick() + FMModulator.tick()) * 0.0025 * (AMModulator.tick() + LFOSAW.tick());
+                    _masterSamp = (Carrier.tick() + FMModulator.tick()) * 0.005 * (AMModulator.tick() + LFOSAW.tick());
+                    _lastVoice5Buffer[i] = _masterSamp;
                     break;
                     
                 case SIX_FINGER:
@@ -166,7 +184,12 @@
 {
     AMModulator.setFreq(freq);
 }
-              
+
+- (int)getVoiceNnum
+{
+    return synthesisState;
+}
+
 - (float)getFMCarrierFreq
 {
     return Carrier.getFreq();
@@ -196,9 +219,31 @@
     return _lastAudioBuffer;
 }
 
+- (float *)lastVoice1Buffer {
+    return _lastVoice1Buffer;
+}
+
+- (float *)lastVoice2Buffer {
+    return _lastVoice2Buffer;
+}
+
+- (float *)lastVoice3Buffer {
+    return _lastVoice3Buffer;
+}
+
+- (float *)lastVoice4Buffer {
+    return _lastVoice4Buffer;
+}
+
+- (float *)lastVoice5Buffer {
+    return _lastVoice5Buffer;
+}
+
+
 - (int)lastAudioBufferSize {
     return _lastAudioBufferSize;
 }
+
 
 @end
 

@@ -12,6 +12,8 @@
 @interface ViewController : GLKViewController
 {
     float hertz;
+    
+    
 }
 @end
 

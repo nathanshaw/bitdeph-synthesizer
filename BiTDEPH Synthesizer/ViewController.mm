@@ -14,6 +14,7 @@
 #import <vector>
 #import <list>
 #import <map>
+#include <tuple>
 
 #define WAVEFORM_GEO_SIZE 2048
 
@@ -41,6 +42,11 @@ public:
     virtual void update() = 0;
     virtual void draw() = 0;
     virtual void fadeOutUpdate() = 0;
+    virtual float getXPos() = 0;
+    virtual float getYPos() = 0;
+    virtual float getRed() = 0;
+    virtual float getGreen() = 0;
+    virtual float getBlue() = 0;
 };
 
 
@@ -54,6 +60,14 @@ public:
     virtual void draw();
     
     void fadeOutUpdate();
+    
+    float getXPos() {
+        return x;
+    }
+    
+    float getYPos() {
+        return y;
+    }
     
     void setColor(float _r, float _g, float _b, float _a)
     {
@@ -69,6 +83,18 @@ public:
     
     float getAlpha() {
         return a;
+    }
+    
+    float getRed() {
+        return r;
+    }
+    
+    float getGreen() {
+        return g;
+    }
+    
+    float getBlue() {
+        return b;
     }
     
     void setPosition(float _x, float _y, float _z)
@@ -163,13 +189,13 @@ Flare::Flare(float width, float height, int touchNum)
 
 void Flare::update()
 {
-    rotation += M_PI/60.0;
+    rotation += M_PI/70.0;
 }
 
 void Flare::fadeOutUpdate()
 {
     rotation += M_PI/120;
-    a = a * 0.992;
+    a = a * 0.993;
 }
 
 void Flare::draw()
@@ -183,7 +209,7 @@ void Flare::draw()
     GLKMatrix4 myModelView = GLKMatrix4Translate(modelView, x, y, z);
     myModelView = GLKMatrix4Rotate(myModelView, rotation, 0, 0, 1);
     myModelView = GLKMatrix4Scale(myModelView, 1+0.25*sin(rotation), 1+0.25*sin(rotation), 1);
-
+    
     
     glVertexAttribPointer(GLKVertexAttribPosition, 2, GL_FLOAT, GL_FALSE, 0, geo);
     glEnableVertexAttribArray(GLKVertexAttribPosition);
@@ -213,6 +239,7 @@ void Flare::draw()
     std::list<RenderObject *> renderList;
     std::list<RenderObject *> fadeOutRenderList;
     std::map<UITouch *, Flare *> touchFlares;
+    //std::list<GLKVector2[WAVEFORM_GEO_SIZE]> waveFormGeos;
     
     GLKVector2 _mainWaveFormGeo[WAVEFORM_GEO_SIZE];
     GLKVector2 _waveFormGeo1[WAVEFORM_GEO_SIZE];
@@ -220,8 +247,8 @@ void Flare::draw()
     GLKVector2 _waveFormGeo3[WAVEFORM_GEO_SIZE];
     GLKVector2 _waveFormGeo4[WAVEFORM_GEO_SIZE];
     GLKVector2 _waveFormGeo5[WAVEFORM_GEO_SIZE];
-    
-
+    GLKVector2 _flareLocations[20];
+    GLKVector2 _flareLocationTranslation[WAVEFORM_GEO_SIZE];
 }
 
 @property (strong, nonatomic) EAGLContext *context;
@@ -271,12 +298,12 @@ void Flare::draw()
 - (void)update
 {
     for (int i = 1; i <= 4; i++) {
-    _rotation[i-1] += (0.005 * i);
+        _rotation[i-1] += (0.005 * i);
     }
     
     for(auto r = renderList.begin(); r != renderList.end(); r++)
         (*r)->update();
-
+    
     for(auto r = fadeOutRenderList.begin(); r != fadeOutRenderList.end(); r++) {
         (*r)->fadeOutUpdate();
     }
@@ -305,35 +332,139 @@ void Flare::draw()
     int audioFrameSize = [[AudioManager instance] lastAudioBufferSize];
     assert (audioFrameSize <= WAVEFORM_GEO_SIZE);
     
-    float *audioFrame = [[AudioManager instance] lastAudioBuffer];
+    //float *audioFrame = [[AudioManager instance] lastAudioBuffer];
     
-    for(int i = 0; i < audioFrameSize; i++) {
-        // GL coordinates are -1 - 1
-        float x = ((float)i)/audioFrameSize * 2.0f - 1.0f;
-        _mainWaveFormGeo[i].x = x;
-        _mainWaveFormGeo[i].y = audioFrame[i];
+    //    for(int i = 0; i < audioFrameSize; i++) {
+    //        // GL coordinates are -1 - 1
+    //        float x = ((float)i)/audioFrameSize * 2.0f - 1.0f;
+    //        _mainWaveFormGeo[i].x = x;
+    //        _mainWaveFormGeo[i].y = audioFrame[i];
+    //    }
+    
+    if(activeTouches) {
+        //  distribute the points to be where they need to be
+        //        int largeHop = (int)(audioFrameSize / (activeTouches - 1));
+        //
+        //        for(int pointNum = 1; pointNum < audioFrameSize-1; pointNum++){
+        //            _flareLocationTranslation[pointNum] = GLKVector2Add(_flareLocationTranslation[pointNum-1], smallHop);
+        //        }
+        int largeHop = (int)(audioFrameSize / activeTouches);
+        int i = 0;
+        for(auto r = renderList.begin(); r != renderList.end(); r++){
+            _flareLocations[i].x = _flareLocationTranslation[i*largeHop].x = (*r)->getXPos();
+            _flareLocations[i].y = _flareLocationTranslation[i*largeHop].y = (*r)->getYPos();
+            i++;
+        }
+        GLKVector2 smallHop = GLKVector2Subtract(_flareLocations[0], _flareLocations[1]);
+        // for every line between each flare
+        for(int hi = 0; hi < (activeTouches - 2); hi++){
+            // for each point on a single line
+            GLKVector2 smallHop = GLKVector2Subtract(_flareLocations[hi+1], _flareLocations[hi]);
+            
+            smallHop.x = smallHop.x/largeHop;
+            smallHop.y = smallHop.y/largeHop;
+            
+            for(int pointNum = hi * largeHop; pointNum < (hi + 1) * largeHop; pointNum++){
+                _flareLocationTranslation[pointNum] = GLKVector2Add(_flareLocationTranslation[pointNum-1], smallHop);
+            }
+        }
     }
     
-    //render waveform
-    glUseProgram(_shaderProgram);
-    glVertexAttribPointer(GLKVertexAttribPosition, 2, GL_FLOAT, GL_FALSE, 0, _mainWaveFormGeo);
-//    glVertexAttribPointer1(GLKVertexAttribPosition, 2, GL_FLOAT, GL_FALSE, 0, _waveFormGeo1);
-//    glVertexAttribPointer2(GLKVertexAttribPosition, 2, GL_FLOAT, GL_FALSE, 0, _waveFormGeo2);
-//    glVertexAttribPointer3(GLKVertexAttribPosition, 2, GL_FLOAT, GL_FALSE, 0, _waveFormGeo3);
-//        glVertexAttribPointer4(GLKVertexAttribPosition, 2, GL_FLOAT, GL_FALSE, 0, _waveFormGeo4);
-//        glVertexAttribPointer5(GLKVertexAttribPosition, 2, GL_FLOAT, GL_FALSE, 0, _waveFormGeo5);
-    glEnableVertexAttribArray(GLKVertexAttribPosition);
+
+else{
+    for(int i = 0; i < audioFrameSize; i++){
+        _flareLocationTranslation[i].x = _flareLocations[0].x;
+        _flareLocationTranslation[i].y = _flareLocations[0].y;
+    }
+}
+
+
+if(activeTouches) {
+    float *voice1Frame = [[AudioManager instance] lastVoice1Buffer];
+        for(int i = 0; i < audioFrameSize; i++){
+            float x = (((float)i)/audioFrameSize * 2.0f) - 1.0f;
+            _waveFormGeo1[i].x = x + _flareLocationTranslation[0].x;
+            _waveFormGeo1[i].y = voice1Frame[i] + _flareLocationTranslation[0].y;
+        }
+        
+        if(activeTouches > 1){
+            float *voice2Frame = [[AudioManager instance] lastVoice2Buffer];
+            for(int i = 0; i < audioFrameSize; i++){
+                float x = ((float)i)/audioFrameSize * 2.0f - 1.0f;
+                _waveFormGeo2[i].x = x + _flareLocationTranslation[1].x;
+                _waveFormGeo2[i].y = voice2Frame[i] + _flareLocationTranslation[1].y;
+            }
+            
+            if(activeTouches > 2){
+                float *voice3Frame = [[AudioManager instance] lastVoice3Buffer];
+                for(int i = 0; i < audioFrameSize; i++){
+                    float x = ((float)i)/audioFrameSize * 2.0f - 1.0f;
+                    _waveFormGeo3[i].x = x + _flareLocations[2].x;
+                    _waveFormGeo3[i].y = voice3Frame[i]  + _flareLocations[2].y;
+                }
+                
+                if(activeTouches > 3){
+                    float *voice4Frame = [[AudioManager instance] lastVoice4Buffer];
+                    for(int i = 0; i < audioFrameSize; i++){
+                        float x = ((float)i)/audioFrameSize * 2.0f - 1.0f;
+                        _waveFormGeo4[i].x = x + _flareLocations[3].x;
+                        _waveFormGeo4[i].y = voice4Frame[i]  + _flareLocations[3].y;
+                    }
+                    
+                    if(activeTouches > 4){
+                        float *voice5Frame = [[AudioManager instance] lastVoice5Buffer];
+                        for(int i = 0; i < audioFrameSize; i++){
+                            float x = ((float)i)/audioFrameSize * 2.0f - 1.0f;
+                            _waveFormGeo5[i].x = x + _flareLocations[4].x;
+                            _waveFormGeo5[i].y = voice5Frame[i] + _flareLocations[4].y;
+                        }
+                    }
+                }
+            }
+        }
+         
+//        for ( int i = 0; i < audioFrameSize; i++ ) {
+//            _mainWaveFormGeo[i] = GLKVector2Add(_mainWaveFormGeo[i], _flareLocations[i]);
+//        }
+    }
     
-    // the color
-    glVertexAttrib3f(GLKVertexAttribColor, 0.9, 0.6, 0.7834);
-    
+    // setup projection and normal matrix for rendering waveforms
     GLKMatrix4 mvp = GLKMatrix4Multiply(projection, modelView);
     GLKMatrix3 normalMatrix = GLKMatrix3InvertAndTranspose(GLKMatrix4GetMatrix3(modelView), NULL);
     glUniformMatrix4fv(_texMvpUniform, 1, GL_FALSE, mvp.m);
     glUniformMatrix3fv(_texNormalMatrixUniform, 1, GL_FALSE, normalMatrix.m);
-    
-    glDrawArrays(GL_LINE_STRIP, 0, audioFrameSize);
-    
+
+    int i = 0;
+    for (auto r = renderList.begin(); r != renderList.end(); r++){
+        
+        glUseProgram(_shaderProgram);
+        if(i == 0)
+        {
+            glVertexAttribPointer(GLKVertexAttribPosition, 2, GL_FLOAT, GL_FALSE, 0, _waveFormGeo1);
+        }
+        else if(i == 1)
+        {
+            glVertexAttribPointer(GLKVertexAttribPosition, 2, GL_FLOAT, GL_FALSE, 0, _waveFormGeo2);
+        }
+        else if(i == 2)
+        {
+            glVertexAttribPointer(GLKVertexAttribPosition, 2, GL_FLOAT, GL_FALSE, 0, _waveFormGeo3);
+        }
+        else if(i == 3)
+        {
+            glVertexAttribPointer(GLKVertexAttribPosition, 2, GL_FLOAT, GL_FALSE, 0, _waveFormGeo4);
+        }
+        else if(i == 4)
+        {
+            glVertexAttribPointer(GLKVertexAttribPosition, 2, GL_FLOAT, GL_FALSE, 0, _waveFormGeo5);
+        }
+        glEnableVertexAttribArray(GLKVertexAttribPosition);
+        glVertexAttrib3f(GLKVertexAttribColor, (*r)->getRed(), (*r)->getGreen(), (*r)->getBlue());
+        glUniformMatrix4fv(_texMvpUniform, 1, GL_FALSE, mvp.m);
+        glUniformMatrix3fv(_texNormalMatrixUniform, 1, GL_FALSE, normalMatrix.m);
+        glDrawArrays(GL_LINE_STRIP, 0, audioFrameSize);
+        i++;
+    }
     // render the Flares
     for(auto r = renderList.begin(); r != renderList.end(); r++)
         (*r)->draw();
@@ -378,7 +509,7 @@ void Flare::draw()
         GLKVector3 vec = GLKMathUnproject(GLKVector3Make(p.x, self.view.bounds.size.height-p.y, 0.1),
                                           modelView, projection, viewport, &success);
         // NSLog(@"move: %f %f %f", vec.x, vec.y, vec.z);
-        
+        // [audioManager setAMFreq:vec.x];
         touchFlares[touch]->setPosition(vec.x, vec.y, vec.z);
     }
 }
@@ -392,10 +523,10 @@ void Flare::draw()
 {
     for(UITouch *touch in touches)
     {
-        CGPoint p = [touch locationInView:self.view];
+        //CGPoint p = [touch locationInView:self.view];
         
-        int viewport[] = { (int)self.view.bounds.origin.x, (int)self.view.bounds.origin.y,
-            (int)self.view.bounds.size.width, (int)self.view.bounds.size.height };
+        //int viewport[] = { (int)self.view.bounds.origin.x, (int)self.view.bounds.origin.y,
+        //   (int)self.view.bounds.size.width, (int)self.view.bounds.size.height };
         // bool success;
         //        GLKVector3 vec = GLKMathUnproject(GLKVector3Make(p.x, self.view.bounds.size.height-p.y, 0.1),
         //                                          modelView, projection, viewport, &success);

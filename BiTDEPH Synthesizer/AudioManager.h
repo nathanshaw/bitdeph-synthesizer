@@ -32,7 +32,14 @@
 - (float)getAMModulatorFreq;
 
 - (float *)lastAudioBuffer;
+- (float *)lastVoice1Buffer;
+- (float *)lastVoice2Buffer;
+- (float *)lastVoice3Buffer;
+- (float *)lastVoice4Buffer;
+- (float *)lastVoice5Buffer;
+
 - (int)lastAudioBufferSize;
+- (int)getVoiceNum;
 
 @end
 
