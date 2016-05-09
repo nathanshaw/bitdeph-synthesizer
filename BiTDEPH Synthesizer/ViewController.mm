@@ -340,14 +340,11 @@ void Flare::draw()
     //        _mainWaveFormGeo[i].x = x;
     //        _mainWaveFormGeo[i].y = audioFrame[i];
     //    }
+    //}
+
     
+    // build waveform geo
     if(activeTouches) {
-        //  distribute the points to be where they need to be
-        //        int largeHop = (int)(audioFrameSize / (activeTouches - 1));
-        //
-        //        for(int pointNum = 1; pointNum < audioFrameSize-1; pointNum++){
-        //            _flareLocationTranslation[pointNum] = GLKVector2Add(_flareLocationTranslation[pointNum-1], smallHop);
-        //        }
         int largeHop = (int)(audioFrameSize / activeTouches);
         int i = 0;
         for(auto r = renderList.begin(); r != renderList.end(); r++){
@@ -355,50 +352,26 @@ void Flare::draw()
             _flareLocations[i].y = _flareLocationTranslation[i*largeHop].y = (*r)->getYPos();
             i++;
         }
-        GLKVector2 smallHop = GLKVector2Subtract(_flareLocations[0], _flareLocations[1]);
-        // for every line between each flare
-        for(int hi = 0; hi < (activeTouches - 2); hi++){
-            // for each point on a single line
-            GLKVector2 smallHop = GLKVector2Subtract(_flareLocations[hi+1], _flareLocations[hi]);
-            
-            smallHop.x = smallHop.x/largeHop;
-            smallHop.y = smallHop.y/largeHop;
-            
-            for(int pointNum = hi * largeHop; pointNum < (hi + 1) * largeHop; pointNum++){
-                _flareLocationTranslation[pointNum] = GLKVector2Add(_flareLocationTranslation[pointNum-1], smallHop);
-            }
-        }
-    }
-    
 
-else{
-    for(int i = 0; i < audioFrameSize; i++){
-        _flareLocationTranslation[i].x = _flareLocations[0].x;
-        _flareLocationTranslation[i].y = _flareLocations[0].y;
-    }
-}
-
-
-if(activeTouches) {
-    float *voice1Frame = [[AudioManager instance] lastVoice1Buffer];
+        float *voice1Frame = [[AudioManager instance] lastVoice1Buffer];
         for(int i = 0; i < audioFrameSize; i++){
-            float x = (((float)i)/audioFrameSize * 2.0f) - 1.0f;
-            _waveFormGeo1[i].x = x + _flareLocationTranslation[0].x;
-            _waveFormGeo1[i].y = voice1Frame[i] + _flareLocationTranslation[0].y;
+            float x = (((float)i)/audioFrameSize * 5.0f) - 2.5f;
+            _waveFormGeo1[i].x = x + _flareLocations[0].x;
+            _waveFormGeo1[i].y = voice1Frame[i] + _flareLocations[0].y;
         }
         
         if(activeTouches > 1){
             float *voice2Frame = [[AudioManager instance] lastVoice2Buffer];
             for(int i = 0; i < audioFrameSize; i++){
-                float x = ((float)i)/audioFrameSize * 2.0f - 1.0f;
-                _waveFormGeo2[i].x = x + _flareLocationTranslation[1].x;
-                _waveFormGeo2[i].y = voice2Frame[i] + _flareLocationTranslation[1].y;
+                float x = ((float)i)/audioFrameSize * 5.0f - 2.5f;
+                _waveFormGeo2[i].x = x + _flareLocations[1].x;
+                _waveFormGeo2[i].y = voice2Frame[i] + _flareLocations[1].y;
             }
             
             if(activeTouches > 2){
                 float *voice3Frame = [[AudioManager instance] lastVoice3Buffer];
                 for(int i = 0; i < audioFrameSize; i++){
-                    float x = ((float)i)/audioFrameSize * 2.0f - 1.0f;
+                    float x = ((float)i)/audioFrameSize * 5.0f - 2.5f;
                     _waveFormGeo3[i].x = x + _flareLocations[2].x;
                     _waveFormGeo3[i].y = voice3Frame[i]  + _flareLocations[2].y;
                 }
@@ -406,7 +379,7 @@ if(activeTouches) {
                 if(activeTouches > 3){
                     float *voice4Frame = [[AudioManager instance] lastVoice4Buffer];
                     for(int i = 0; i < audioFrameSize; i++){
-                        float x = ((float)i)/audioFrameSize * 2.0f - 1.0f;
+                        float x = ((float)i)/audioFrameSize * 5.0f - 2.5f;
                         _waveFormGeo4[i].x = x + _flareLocations[3].x;
                         _waveFormGeo4[i].y = voice4Frame[i]  + _flareLocations[3].y;
                     }
@@ -414,7 +387,7 @@ if(activeTouches) {
                     if(activeTouches > 4){
                         float *voice5Frame = [[AudioManager instance] lastVoice5Buffer];
                         for(int i = 0; i < audioFrameSize; i++){
-                            float x = ((float)i)/audioFrameSize * 2.0f - 1.0f;
+                            float x = ((float)i)/audioFrameSize * 5.0f - 2.5f;
                             _waveFormGeo5[i].x = x + _flareLocations[4].x;
                             _waveFormGeo5[i].y = voice5Frame[i] + _flareLocations[4].y;
                         }
@@ -422,10 +395,6 @@ if(activeTouches) {
                 }
             }
         }
-         
-//        for ( int i = 0; i < audioFrameSize; i++ ) {
-//            _mainWaveFormGeo[i] = GLKVector2Add(_mainWaveFormGeo[i], _flareLocations[i]);
-//        }
     }
     
     // setup projection and normal matrix for rendering waveforms
@@ -433,7 +402,7 @@ if(activeTouches) {
     GLKMatrix3 normalMatrix = GLKMatrix3InvertAndTranspose(GLKMatrix4GetMatrix3(modelView), NULL);
     glUniformMatrix4fv(_texMvpUniform, 1, GL_FALSE, mvp.m);
     glUniformMatrix3fv(_texNormalMatrixUniform, 1, GL_FALSE, normalMatrix.m);
-
+    
     int i = 0;
     for (auto r = renderList.begin(); r != renderList.end(); r++){
         

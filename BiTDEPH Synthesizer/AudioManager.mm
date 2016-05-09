@@ -41,6 +41,12 @@
     SinOsc AMModulator;
     SawOsc LFOSAW;
     SqrOsc LFOSQR;
+    
+    float cSamp;
+    float fModSamp;
+    float aModSamp;
+    float sawLFOSamp;
+    float sqrLFOSamp;
 }
 
 @end
@@ -96,28 +102,56 @@
                     
                 case ONLY_CARRIER:
                     //
-                    _masterSamp = Carrier.tick();
+                    _masterSamp = cSamp = Carrier.tick();
                     _lastVoice1Buffer[i] = _masterSamp;
                     break;
                     
                 case FM_ACTIVE:
-                    Carrier.setFreq(FMModulator.tick() + 300);
-                    _masterSamp = (Carrier.tick());
-                    _lastVoice2Buffer[i] = _masterSamp;
+                    Carrier.setFreq(fModSamp);
+                    fModSamp = FMModulator.tick() + 300;
+                    _lastVoice1Buffer[i] =_masterSamp = (Carrier.tick());
+                    _lastVoice2Buffer[i] = fModSamp;
                     break;
                     
                 case AM_ACTIVE:
-                    _masterSamp = (Carrier.tick() + FMModulator.tick()) * 0.01 * AMModulator.tick();
-                    _lastVoice3Buffer[i] = _masterSamp;
+                    Carrier.setFreq(fModSamp);
+                    fModSamp = FMModulator.tick() + 300;
+                    aModSamp = AMModulator.tick();
+                    cSamp = Carrier.tick();
+                    
+                    _masterSamp = (cSamp + fModSamp) * 0.01 * aModSamp;
+                    _lastVoice1Buffer[i] = cSamp;
+                    _lastVoice2Buffer[i] = fModSamp;
+                    _lastVoice3Buffer[i] = aModSamp;
                     break;
                     
                 case FOUR_FINGER:
-                    _masterSamp = ((Carrier.tick() * FMModulator.tick()) * 0.008) + ((AMModulator.tick() * LFOSQR.tick()) * 0.5);
-                    _lastVoice4Buffer[i] = _masterSamp;
+                    Carrier.setFreq(fModSamp);
+                    fModSamp = FMModulator.tick() + 300;
+                    aModSamp = AMModulator.tick();
+                    cSamp = Carrier.tick();
+                    sqrLFOSamp = LFOSQR.tick();
+                    
+                    _masterSamp = ((cSamp * fModSamp) * 0.008) + (aModSamp * sqrLFOSamp * 0.5);
+                    _lastVoice1Buffer[i] = cSamp;
+                    _lastVoice2Buffer[i] = fModSamp;
+                    _lastVoice3Buffer[i] = aModSamp;
+                    _lastVoice4Buffer[i] = sqrLFOSamp;
                     break;
                     
                 case FIVE_FINGER:
-                    _masterSamp = (Carrier.tick() + FMModulator.tick()) * 0.005 * (AMModulator.tick() + LFOSAW.tick());
+                    Carrier.setFreq(fModSamp);
+                    fModSamp = FMModulator.tick() + 300;
+                    aModSamp = AMModulator.tick();
+                    cSamp = Carrier.tick();
+                    sqrLFOSamp = LFOSQR.tick();
+                    sawLFOSamp = LFOSAW.tick();
+                    
+                    _masterSamp = (cSamp + fModSamp) * 0.005 * (aModSamp + sawLFOSamp);
+                    _lastVoice1Buffer[i] = cSamp;
+                    _lastVoice2Buffer[i] = fModSamp;
+                    _lastVoice3Buffer[i] = aModSamp;
+                    _lastVoice4Buffer[i] = sqrLFOSamp;
                     _lastVoice5Buffer[i] = _masterSamp;
                     break;
                     
